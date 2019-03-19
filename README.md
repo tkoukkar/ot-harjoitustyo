@@ -9,5 +9,3 @@
 [komentorivi.txt](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 
-
-Tavallista tekstiä, joka sisältää **lihavoituja** ja *kursivoituja* osuuksia.
