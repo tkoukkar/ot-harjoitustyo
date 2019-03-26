@@ -11,6 +11,6 @@
 
 ### Viikko 2
 
-[Alustava määrittelydokumentti] (https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[alustava määrittelydokumentti](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito] (https://github.com/tkoukkar/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
+[työaikakirjanpito](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
