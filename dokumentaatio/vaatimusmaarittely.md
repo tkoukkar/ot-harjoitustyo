@@ -30,3 +30,4 @@ Sovelluksesta pyritään tekemään mahdollisimman helposti muokattava ja laajen
 * Pelin jakaminen tasoihin, jotka vaikeutuvat esim. uudentyyppisten vihollisalusten myötä asteittain
 * Pelitilanteen tallennusmahdollisuus ainakin tasojen välissä
 * Mahdollisuus kerätä pisteiden lisäksi tai sijasta rahaa, jolla avaruusalukseen voi ostaa (esim. erillisessä tasojen välisessä näkymässä) lisää suojia, parempia aseita ym.
+* Mahdollisuus valita pelin käyttöliittymän kieli (esim. suomi, englanti, ~~klingon~~)
