@@ -13,4 +13,4 @@
 
 [alustava määrittelydokumentti](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[työaikakirjanpito](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
+[työaikakirjanpito](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
