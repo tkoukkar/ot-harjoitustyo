@@ -9,6 +9,6 @@ päivä | aika | mitä tein
 27.3. |2| suunnittelu, JavaFX:ään perehtyminen
 28.3. |2| suunnittelu, JavaFX:ään perehtyminen
 29.3. |1| suunnittelu, JavaFX:ään perehtyminen
-31.3. |3| JavaFX:ään perehtyminen, päävalikon luominen
+31.3. |4| JavaFX:ään perehtyminen, päävalikon luominen
 1.4.  |7| refaktorointi, käyttöliittymän alustava toteutus
 2.4.  |5| refaktorointi, käyttöliittymän kehitys, testien luominen
