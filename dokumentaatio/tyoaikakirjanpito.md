@@ -15,6 +15,6 @@ päivä | aika | mitä tein
 4.4.  |3| sovelluslogiikan suunnittelu, refaktorointi
 5.4.  |5| käsittelijäolioiden toteutus ja käyttöliittymän kehitys, refaktorointi
 6.4.  |2| JavaFX:ään perehtyminen, aseen toiminnan alustava toteutus
-7.4.  |4| aseen toiminnan ja käyttöliittymän kehitys, refaktorointi, testien luominen
+7.4.  |4| aseen toiminnan ja käyttöliittymän kehitys, refaktorointi, testauksen kehitys
 8.4.  |5| sovelluslogiikan suunnittelu, refaktorointi, testien luominen
-9.4.  |5| sovellusarkkitehtuurin suunnittelu ja kaavion piirtäminen, refaktorointi
+9.4.  |5| sovellusarkkitehtuurin suunnittelu ja kaavion piirtäminen, refaktorointi, testien luominen
