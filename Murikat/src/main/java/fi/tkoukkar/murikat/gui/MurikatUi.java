@@ -1,3 +1,5 @@
+package fi.tkoukkar.murikat.gui;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +11,13 @@
  * @author tkoukkar
  */
 
-import java.util.HashMap;
+// import fi.tkoukkar.murikat.sprites.Projectile;
+import fi.tkoukkar.murikat.logics.Sprite;
+import fi.tkoukkar.murikat.logics.Spaceship;
+import fi.tkoukkar.murikat.logics.InputHandler;
+import fi.tkoukkar.murikat.logics.SpriteHandler;
+
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,8 +29,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyCode;
+import javafx.scene.shape.Polygon;
+import javafx.scene.paint.Color;
 
 public class MurikatUi extends Application {
     public static int w = 1280;
@@ -62,37 +72,57 @@ public class MurikatUi extends Application {
     }
     
     public void run(Stage primaryStage) {
+        // Set stage
+        Random r = new Random();
+        
         Pane gamePane = new Pane();
         gamePane.setStyle("-fx-background-color: black;");
         gamePane.setPrefSize(w, h);
         
-        Spaceship ship = new Spaceship(w / 2, h / 2);
+        Polygon s = new Polygon(-8, -8, 24, 0, -8, 8);
+        Sprite shipSprite = new Sprite(s, w / 2, h / 2, 0);
+        Spaceship ship = new Spaceship(shipSprite);
         
-        gamePane.getChildren().add(ship.getSprite());
+        Polygon p = new Polygon(-10 - r.nextInt(10), -10 - r.nextInt(10), -10 - r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), -10 - r.nextInt(10));
+        Sprite rock = new Sprite(p, 10, 10, 0);
+        rock.accelerate(45, 0.2);
+        
+        SpriteHandler sptHdlr = new SpriteHandler(w, h);
+        
+        sptHdlr.addSprite(shipSprite);
+        sptHdlr.addSprite(rock);
+        gamePane.getChildren().addAll(shipSprite.getForm(), rock.getForm());
         
         Scene gScene = new Scene(gamePane);
         
-        gScene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.LEFT) {
-                ship.turnLeft();
-            }
+        // Init. controls
+        InputHandler inpHdlr = new InputHandler();
         
-            if (event.getCode() == KeyCode.RIGHT) {
-                ship.turnRight();
-            }
-            
-            if (event.getCode() == KeyCode.UP) {
-                ship.accelerate();
-            }
+        gScene.setOnKeyPressed(event -> {
+            inpHdlr.input(event.getCode());
         });
         
+        gScene.setOnKeyReleased(event -> {
+            inpHdlr.remove(event.getCode());
+        });
+        
+        // Main loop
         new AnimationTimer() {
             @Override
-            public void handle(long now) {
-                ship.move();
+            public void handle (long now) {
+                inpHdlr.processControls(ship);
+                
+                if (inpHdlr.getTriggerState() == 1) {
+                    Sprite projectile = ship.fire();
+                    sptHdlr.addSprite(projectile);
+                    gamePane.getChildren().add(projectile.getForm());
+                }
+                
+                sptHdlr.processMovement();
             }
         }.start();
         
         primaryStage.setScene(gScene);
     }
 }
+
