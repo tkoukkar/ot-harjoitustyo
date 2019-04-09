@@ -13,8 +13,8 @@ päivä | aika | mitä tein
 1.4.  |7| refaktorointi, käyttöliittymän alustava toteutus
 2.4.  |5| refaktorointi, käyttöliittymän kehitys, testien luominen
 4.4.  |3| sovelluslogiikan suunnittelu, refaktorointi
-5.5.  |5| käsittelijäolioiden toteutus ja käyttöliittymän kehitys, refaktorointi
-6.5.  |2| JavaFX:ään perehtyminen, aseen toiminnan alustava toteutus
-7.5.  |4| aseen toiminnan ja käyttöliittymän kehitys, refaktorointi, testien luominen
-8.5.  |5| sovelluslogiikan suunnittelu, refaktorointi, testien luominen
-9.5.  |4| sovellusarkkitehtuurin suunnittelu ja kaavion piirtäminen, refaktorointi
+5.4.  |5| käsittelijäolioiden toteutus ja käyttöliittymän kehitys, refaktorointi
+6.4.  |2| JavaFX:ään perehtyminen, aseen toiminnan alustava toteutus
+7.4.  |4| aseen toiminnan ja käyttöliittymän kehitys, refaktorointi, testien luominen
+8.4.  |5| sovelluslogiikan suunnittelu, refaktorointi, testien luominen
+9.4.  |5| sovellusarkkitehtuurin suunnittelu ja kaavion piirtäminen, refaktorointi
