@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-import fi.tkoukkar.murikat.gui.MurikatUi;
-import static fi.tkoukkar.murikat.gui.MurikatUi.h;
-import static fi.tkoukkar.murikat.gui.MurikatUi.w;
-import fi.tkoukkar.murikat.logics.Spaceship;
-import fi.tkoukkar.murikat.logics.Sprite;
-import fi.tkoukkar.murikat.logics.SpriteHandler;
+import murikat.gui.MurikatUi;
+import static murikat.gui.MurikatUi.h;
+import static murikat.gui.MurikatUi.w;
+import murikat.logics.Spaceship;
+import murikat.logics.Sprite;
+import murikat.logics.SpriteHandler;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;

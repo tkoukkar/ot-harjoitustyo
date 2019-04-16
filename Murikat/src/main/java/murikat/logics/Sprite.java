@@ -1,4 +1,4 @@
-package fi.tkoukkar.murikat.logics;
+package murikat.logics;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

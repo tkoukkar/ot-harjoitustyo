@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 
-package fi.tkoukkar.murikat.logics;
+package murikat.logics;
 
 /**
  *
  * @author tkoukkar
  */
 
-import fi.tkoukkar.murikat.gui.MurikatUi;
-import static fi.tkoukkar.murikat.gui.MurikatUi.h;
-import static fi.tkoukkar.murikat.gui.MurikatUi.w;
+import murikat.gui.MurikatUi;
+import static murikat.gui.MurikatUi.h;
+import static murikat.gui.MurikatUi.w;
 
 import java.util.HashSet;
 import java.util.Iterator;

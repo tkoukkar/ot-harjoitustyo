@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import fi.tkoukkar.murikat.logics.Sprite;
+import murikat.logics.Sprite;
 
 import org.junit.After;
 import org.junit.Before;
@@ -113,7 +113,4 @@ public class SpriteTest {
         
         assertEquals(v, s.getVelocity());
     }
-    
-
-    
 }

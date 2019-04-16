@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import fi.tkoukkar.murikat.logics.Sprite;
-import fi.tkoukkar.murikat.logics.Spaceship;
+import murikat.logics.Sprite;
+import murikat.logics.Spaceship;
 
 import org.junit.After;
 import org.junit.AfterClass;

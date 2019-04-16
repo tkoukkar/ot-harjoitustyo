@@ -1,4 +1,4 @@
-package fi.tkoukkar.murikat.gui;
+package murikat.gui;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,10 +11,10 @@ package fi.tkoukkar.murikat.gui;
  * @author tkoukkar
  */
 
-import fi.tkoukkar.murikat.logics.Sprite;
-import fi.tkoukkar.murikat.logics.Spaceship;
-import fi.tkoukkar.murikat.logics.InputHandler;
-import fi.tkoukkar.murikat.logics.SpriteHandler;
+import murikat.logics.Sprite;
+import murikat.logics.Spaceship;
+import murikat.logics.InputHandler;
+import murikat.logics.SpriteHandler;
 
 import java.util.Random;
 import java.util.logging.Level;
@@ -94,7 +94,6 @@ public class MurikatUi extends Application {
         
         gamePane.getChildren().add(ptsDisplay);
         
-        // -> 
         SpriteHandler sptHdlr = new SpriteHandler(gamePane);
         
         Spaceship ship = sptHdlr.buildSpaceship();
@@ -145,18 +144,20 @@ public class MurikatUi extends Application {
                         primaryStage.setScene(mainMenu(primaryStage));
                     } else {                                            // add points
                         pts += 100;
-                        // System.out.println(Integer.toString(pts));
                         ptsDisplay.setText(Integer.toString(pts));
                     }
                 }
                 
                 int p = r.nextInt(10000 - pts);
+                if (pts >= 10000) {
+                    p = r.nextInt(100);
+                }
                 
                 if (p < 20 - (2 * sptHdlr.getNumberOfRocks())) {
                     sptHdlr.spawnRock(p);
                 }
             }
-        }); // .start();
+        });
         
         timeline.setCycleCount(Timeline.INDEFINITE); 
         timeline.setAutoReverse(false); 
@@ -166,15 +167,3 @@ public class MurikatUi extends Application {
         primaryStage.setScene(gScene);
     }
 }
-
-        /* Polygon s = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(s, w / 2, h / 2, 0);
-        Spaceship ship = new Spaceship(shipSprite);
-        
-        Polygon p = new Polygon(-10 - r.nextInt(10), -10 - r.nextInt(10), -10 - r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), -10 - r.nextInt(10));
-        Sprite rock = new Sprite(p, 10, 10, 0);
-        rock.accelerate(45, 0.2);
-        
-        sptHdlr.addSprite(shipSprite);
-        sptHdlr.addSprite(rock);
-        gamePane.getChildren().addAll(shipSprite.getForm(), rock.getForm());*/
