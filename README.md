@@ -1,4 +1,6 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Murikat
+
+Sovellus on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella, jolle ilmaantuu sen laidoilta ajoittain erilaisia asteroideja, vihollisaluksia ja bonusartefakteja. Näistä viimeksi mainittuja pelaajan tulee kerätä ja edellisiä puolestaan väistellä ja/tai tuhota.
 
 ## Dokumentaatio
 
