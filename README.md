@@ -38,7 +38,7 @@ generoi hakemistoon *target* suoritettavan jar-tiedoston *Murikat-1.0-SNAPSHOT.j
 
 ### Checkstyle
 
-Tiedoston checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/checkstyle.xml) määrittelemät tarkastukset suoritetaan komennolla
 
 `mvn jxr:jxr checkstyle:checkstyle`
 
