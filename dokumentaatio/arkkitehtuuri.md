@@ -1,7 +1,9 @@
-#Arkkitehtuurikuvaus
+# Arkkitehtuurikuvaus
 
-##Alustava pakkauskaavio
+## Alustava pakkauskaavio
 
 ![alustava pakkauskaavio](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/pakkauskaavio.jpg)
 
-##Sekvenssikaavio tilanteesta, jossa pelaaja lähtee liikkeelle pelin alussa
+## Sekvenssikaavio tilanteesta, jossa pelaaja lähtee liikkeelle pelin alussa
+
+![sekvenssikaavio](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio_murikat_viikko5.png)
