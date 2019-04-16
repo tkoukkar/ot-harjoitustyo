@@ -33,7 +33,7 @@ public class SpriteTest {
         h = 200;
         
         p = new Polygon(-8, -8, 24, 0, -8, 8);
-        s = new Sprite(p, w / 2, h / 2, 0);
+        s = new Sprite(p, w / 2, h / 2);
     }
     
     @After

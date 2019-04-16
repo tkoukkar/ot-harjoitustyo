@@ -11,13 +11,14 @@ package fi.tkoukkar.murikat.gui;
  * @author tkoukkar
  */
 
-// import fi.tkoukkar.murikat.sprites.Projectile;
 import fi.tkoukkar.murikat.logics.Sprite;
 import fi.tkoukkar.murikat.logics.Spaceship;
 import fi.tkoukkar.murikat.logics.InputHandler;
 import fi.tkoukkar.murikat.logics.SpriteHandler;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,14 +30,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
-import javafx.animation.AnimationTimer;
+import javafx.scene.control.Label;
+import javafx.animation.*;
+import javafx.event.Event;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Polygon;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class MurikatUi extends Application {
     public static int w = 1280;
     public static int h = 960;
+    
+    private int pts;
         
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -54,7 +60,12 @@ public class MurikatUi extends Application {
         Button scoreBtn = new Button("Ennätykset");
         Button exitBtn = new Button("Lopeta");
         
+        startBtn.setFocusTraversable(false);
+        scoreBtn.setFocusTraversable(false);
+        exitBtn.setFocusTraversable(false);
+        
         startBtn.setOnAction(event -> {
+            pts = 0;
             run(primaryStage);
         });
         
@@ -64,6 +75,7 @@ public class MurikatUi extends Application {
         
         VBox menuBox = new VBox(24);
         menuBox.setPrefSize(w, h);
+        menuBox.setStyle("-fx-background-color: black;");
         menuBox.setAlignment(Pos.CENTER);
         menuBox.getChildren().addAll(startBtn, scoreBtn, exitBtn);
         
@@ -73,30 +85,25 @@ public class MurikatUi extends Application {
     
     public void run(Stage primaryStage) {
         // Set stage
-        Random r = new Random();
-        
         Pane gamePane = new Pane();
         gamePane.setStyle("-fx-background-color: black;");
         gamePane.setPrefSize(w, h);
         
-        Polygon s = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(s, w / 2, h / 2, 0);
-        Spaceship ship = new Spaceship(shipSprite);
+        Label ptsDisplay = new Label("0");
+        ptsDisplay.setTextFill(Color.GREENYELLOW);
         
-        Polygon p = new Polygon(-10 - r.nextInt(10), -10 - r.nextInt(10), -10 - r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), -10 - r.nextInt(10));
-        Sprite rock = new Sprite(p, 10, 10, 0);
-        rock.accelerate(45, 0.2);
+        gamePane.getChildren().add(ptsDisplay);
         
-        SpriteHandler sptHdlr = new SpriteHandler(w, h);
+        // -> 
+        SpriteHandler sptHdlr = new SpriteHandler(gamePane);
         
-        sptHdlr.addSprite(shipSprite);
-        sptHdlr.addSprite(rock);
-        gamePane.getChildren().addAll(shipSprite.getForm(), rock.getForm());
+        Spaceship ship = sptHdlr.buildSpaceship();
+        sptHdlr.initRocks();
         
         Scene gScene = new Scene(gamePane);
         
         // Init. controls
-        InputHandler inpHdlr = new InputHandler();
+        InputHandler inpHdlr = new InputHandler(ship);
         
         gScene.setOnKeyPressed(event -> {
             inpHdlr.input(event.getCode());
@@ -107,22 +114,67 @@ public class MurikatUi extends Application {
         });
         
         // Main loop
-        new AnimationTimer() {
+        Timeline timeline  = new Timeline();
+        Random r = new Random();
+        
+        final Duration frDur = Duration.millis(1000/60);
+        
+        final KeyFrame frame = new KeyFrame(frDur, new EventHandler() {
             @Override
-            public void handle (long now) {
-                inpHdlr.processControls(ship);
-                
+            public void handle(Event event) {
+                inpHdlr.processControls();
+
                 if (inpHdlr.getTriggerState() == 1) {
-                    Sprite projectile = ship.fire();
-                    sptHdlr.addSprite(projectile);
-                    gamePane.getChildren().add(projectile.getForm());
+                    sptHdlr.processFiring(ship);
+                }
+
+                sptHdlr.processMovement();
+                Boolean collision = sptHdlr.processCollisions();
+                sptHdlr.processDestruction();
+
+                if (collision) {
+                    if (ship.getSprite().isDestroyed()) {               // game over
+                        timeline.stop();
+                        
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(MurikatUi.class.getName()).log(Level.SEVERE, null, ex);
+                        } 
+                        
+                        primaryStage.setScene(mainMenu(primaryStage));
+                    } else {                                            // add points
+                        pts += 100;
+                        // System.out.println(Integer.toString(pts));
+                        ptsDisplay.setText(Integer.toString(pts));
+                    }
                 }
                 
-                sptHdlr.processMovement();
+                int p = r.nextInt(10000 - pts);
+                
+                if (p < 20 - (2 * sptHdlr.getNumberOfRocks())) {
+                    sptHdlr.spawnRock(p);
+                }
             }
-        }.start();
+        }); // .start();
+        
+        timeline.setCycleCount(Timeline.INDEFINITE); 
+        timeline.setAutoReverse(false); 
+        timeline.getKeyFrames().add(frame); 
+        timeline.play();
         
         primaryStage.setScene(gScene);
     }
 }
 
+        /* Polygon s = new Polygon(-8, -8, 24, 0, -8, 8);
+        Sprite shipSprite = new Sprite(s, w / 2, h / 2, 0);
+        Spaceship ship = new Spaceship(shipSprite);
+        
+        Polygon p = new Polygon(-10 - r.nextInt(10), -10 - r.nextInt(10), -10 - r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), 10 + r.nextInt(10), -10 - r.nextInt(10));
+        Sprite rock = new Sprite(p, 10, 10, 0);
+        rock.accelerate(45, 0.2);
+        
+        sptHdlr.addSprite(shipSprite);
+        sptHdlr.addSprite(rock);
+        gamePane.getChildren().addAll(shipSprite.getForm(), rock.getForm());*/

@@ -37,10 +37,10 @@ public class InputHandlingTest {
         h = 200;
         
         Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(p, w / 2, h / 2, 0);
+        Sprite shipSprite = new Sprite(p, w / 2, h / 2);
         ship = new Spaceship(shipSprite);
         
-        iph = new InputHandler();
+        iph = new InputHandler(ship);
     }
     
     @After
@@ -57,59 +57,59 @@ public class InputHandlingTest {
     public void controlsTestTurnLeft() {
         iph.input(KeyCode.LEFT);
         
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
         
-        assertEquals(-95, ship.getSprite().getForm().getRotate(), 0.5);
+        assertEquals(-105, ship.getSprite().getForm().getRotate(), 0.5);
     }
     
     @Test
     public void controlsTestTurnRight() {
         iph.input(KeyCode.RIGHT);
         
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
         
-        assertEquals(-85, ship.getSprite().getForm().getRotate(), 0.5);
+        assertEquals(-75, ship.getSprite().getForm().getRotate(), 0.5);
     }
     
     @Test
     public void keyReleaseTestInputRemoved() {
         iph.input(KeyCode.LEFT);
         
-        iph.processControls(ship);  // Rotation: -91
-        iph.processControls(ship);  // Rotation: -92
-        iph.processControls(ship);  // Rotation: -93
+        iph.processControls();  // Rotation: -93
+        iph.processControls();  // Rotation: -96
+        iph.processControls();  // Rotation: -99
         
         iph.remove(KeyCode.LEFT);
         
-        iph.processControls(ship);
-        iph.processControls(ship);
+        iph.processControls();
+        iph.processControls();
         
         iph.input(KeyCode.RIGHT);
         
-        iph.processControls(ship);  // Rotation: -92
+        iph.processControls();  // Rotation: -96
         
         iph.remove(KeyCode.RIGHT);
         
-        iph.processControls(ship);
+        iph.processControls();
         
-        assertEquals(-92, ship.getSprite().getForm().getRotate(), 0.5);
+        assertEquals(-96, ship.getSprite().getForm().getRotate(), 0.5);
     }
     
     @Test
     public void triggerStateTestIncreaseWhileHeld() {
         iph.input(KeyCode.SPACE);
         
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
         
         assertEquals(3, iph.getTriggerState());
     }
@@ -118,9 +118,9 @@ public class InputHandlingTest {
     public void triggerStateTestResetOnRelease() {
         iph.input(KeyCode.SPACE);
         
-        iph.processControls(ship);
-        iph.processControls(ship);
-        iph.processControls(ship);
+        iph.processControls();
+        iph.processControls();
+        iph.processControls();
         
         iph.remove(KeyCode.SPACE);
         

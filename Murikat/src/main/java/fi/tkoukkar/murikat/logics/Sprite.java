@@ -19,20 +19,20 @@ import javafx.scene.paint.Color;
 public class Sprite {
     private Polygon form;
     private Point2D velocity;
+
+    private int hitPts;
     private Boolean destroyed;
-    private int type;
     
-    public Sprite(Polygon p, double x, double y, int t) {
+    public Sprite(Polygon p, double x, double y) {
         this.form = p;
         
-        this.form.setFill(Color.WHITE);
         this.form.setTranslateX(x);
         this.form.setTranslateY(y);
         
         this.velocity = new Point2D(0, 0);
         
+        this.hitPts = 1;
         this.destroyed = false;
-        this.type = t;
     }
     
     public Polygon getForm() {
@@ -60,6 +60,10 @@ public class Sprite {
         return this.velocity;
     }
     
+    public void setVelocity(Point2D v) {
+        this.velocity = v;
+    }
+    
     public void accelerate(double dir, double v) {
         double xComp = Math.cos(Math.toRadians(this.form.getRotate() + dir)) * v;
         double yComp = Math.sin(Math.toRadians(this.form.getRotate() + dir)) * v;
@@ -68,15 +72,24 @@ public class Sprite {
     }
     
     public Sprite emitProjectile(Polygon p, double dir, double v) {
-        Sprite projectile = new Sprite(p, this.form.getTranslateX() + 8, this.form.getTranslateY(), 1);
+        Sprite projectile = new Sprite(p, this.form.getTranslateX() + 8, this.form.getTranslateY());
         
         projectile.accelerate(this.form.getRotate() + dir, v);
         
         return projectile;
     }
     
-    public int getType() {
-        return this.type;
+    public void setHitPts(int value) {
+        this.hitPts = value;
+    }
+    
+    public int getHitPts() {
+        return this.hitPts;
+    }
+    
+    public void destroy() {
+        this.getForm().setVisible(false);
+        this.destroyed = true;
     }
     
     public Boolean isDestroyed() {

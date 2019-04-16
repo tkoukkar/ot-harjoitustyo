@@ -16,15 +16,14 @@ import java.util.HashSet;
 import javafx.scene.input.KeyCode;
 
 public class InputHandler {
-    HashSet<KeyCode> keys;
+    private HashSet<KeyCode> keys;
+    private Spaceship ship;
     private int triggerState;
-    
-    private double shipThrust;
-    
-    public InputHandler() {
+        
+    public InputHandler(Spaceship s) {
         this.keys = new HashSet<>();
+        this.ship = s;
         this.triggerState = 0;
-        this.shipThrust = 0.01;
     }
     
     public void input(KeyCode kc) {
@@ -39,18 +38,18 @@ public class InputHandler {
         }
     }
     
-    public void processControls(Spaceship s) {
+    public void processControls() {
         this.keys.forEach(c -> {
             if (c.equals(KeyCode.LEFT)) {
-                s.turnLeft();
+                this.ship.turnLeft();
             }
             
             if (c.equals(KeyCode.RIGHT)) {
-                s.turnRight();
+                this.ship.turnRight();
             }
             
             if (c.equals(KeyCode.UP)) {
-                s.accelerate();
+                this.ship.accelerate();
             }
             
             if (c.equals(KeyCode.SPACE)) {

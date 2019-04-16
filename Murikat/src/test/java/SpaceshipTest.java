@@ -43,7 +43,7 @@ public class SpaceshipTest {
         h = 200;
         
         Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(p, w / 2, h / 2, 0);
+        Sprite shipSprite = new Sprite(p, w / 2, h / 2);
         ship = new Spaceship(shipSprite);
     }
     
@@ -75,7 +75,7 @@ public class SpaceshipTest {
         ship.turnLeft();
         ship.turnLeft();
         
-        assertEquals(-95, ship.getSprite().getForm().getRotate(), 0.5);
+        assertEquals(-105, ship.getSprite().getForm().getRotate(), 0.5);
     }
     
     @Test
@@ -86,7 +86,7 @@ public class SpaceshipTest {
         ship.turnRight();
         ship.turnRight();
         
-        assertEquals(-85, ship.getSprite().getForm().getRotate(), 0.5);
+        assertEquals(-75, ship.getSprite().getForm().getRotate(), 0.5);
     }
     
     @Test
@@ -100,7 +100,7 @@ public class SpaceshipTest {
     public void weaponsTestProjectileVelocity() {
         Sprite p = ship.fire();
         
-        double y = Math.sin(Math.toRadians(-90)) * 2.5;
+        double y = Math.sin(Math.toRadians(-90)) * 12;
         
         assertEquals(y, p.getVelocity().getY(), 0.5);
     }
