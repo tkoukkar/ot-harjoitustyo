@@ -28,9 +28,12 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.text.Font;
 import javafx.animation.*;
 import javafx.event.Event;
 import javafx.scene.input.KeyCode;
@@ -69,6 +72,10 @@ public class MurikatUi extends Application {
             run(primaryStage);
         });
         
+        scoreBtn.setOnAction(event -> {
+            primaryStage.setScene(hiScores(primaryStage));
+        });
+        
         exitBtn.setOnAction(event -> {
             Platform.exit();
         });
@@ -83,6 +90,50 @@ public class MurikatUi extends Application {
         return mScene;
     }
     
+    public Scene hiScores(Stage primaryStage) {
+        ListView nameList = new ListView();
+        ListView scoreList = new ListView();
+        
+        nameList.setMouseTransparent(true);
+        nameList.setFocusTraversable(false);
+        
+        scoreList.setMouseTransparent(true);
+        scoreList.setFocusTraversable(false);
+        
+        nameList.getItems().add("Item 1");
+        nameList.getItems().add("Item 2");
+        nameList.getItems().add("Item 3");
+        
+        scoreList.getItems().add("10000");
+        scoreList.getItems().add("9000");
+        scoreList.getItems().add("8000");
+        
+        scoreList.setPrefWidth(64);
+        
+        HBox scoreBox = new HBox(24);
+        scoreBox.setPrefSize(w, h / 2);
+        scoreBox.setAlignment(Pos.CENTER);
+        
+        scoreBox.getChildren().addAll(nameList, scoreList);
+        
+        Button okBtn = new Button("OK");
+        okBtn.setPrefSize(200, 36);
+        
+        okBtn.setOnAction(event -> {
+            primaryStage.setScene(mainMenu(primaryStage));
+        });
+        
+        VBox boxBox = new VBox(24);
+        boxBox.setPrefSize(w, h);
+        boxBox.setAlignment(Pos.CENTER);
+        boxBox.setStyle("-fx-background-color: black;");
+        
+        boxBox.getChildren().addAll(scoreBox, okBtn);
+        
+        Scene sScene = new Scene(boxBox);
+        return sScene;
+    }
+    
     public void run(Stage primaryStage) {
         // Set stage
         Pane gamePane = new Pane();
@@ -90,6 +141,7 @@ public class MurikatUi extends Application {
         gamePane.setPrefSize(w, h);
         
         Label ptsDisplay = new Label("0");
+        ptsDisplay.setFont(new Font("Courier", 20));
         ptsDisplay.setTextFill(Color.GREENYELLOW);
         
         gamePane.getChildren().add(ptsDisplay);
@@ -153,7 +205,7 @@ public class MurikatUi extends Application {
                     p = r.nextInt(100);
                 }
                 
-                if (p < 20 - (2 * sptHdlr.getNumberOfRocks())) {
+                if (p < 20 - (sptHdlr.getNumberOfRocks())) {
                     sptHdlr.spawnRock(p);
                 }
             }

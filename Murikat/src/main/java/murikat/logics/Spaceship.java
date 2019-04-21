@@ -11,6 +11,10 @@ package murikat.logics;
  * @author tkoukkar
  */
 
+import murikat.dao.SpaceshipDao;
+
+import java.io.File;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.geometry.Point2D;
@@ -20,13 +24,17 @@ public class Spaceship {
     private double wpnPower;
     private Sprite sprite;
     
+    private SpaceshipDao shipDao;
+    
     public Spaceship(Sprite s) {
         this.sprite = s;
         
         this.sprite.rotate(-90);
         
-        this.thrust = 0.1;
-        this.wpnPower = 12;
+        this.shipDao = new SpaceshipDao("spaceship.dat");
+        
+        this.thrust = shipDao.getThrust();
+        this.wpnPower = shipDao.getWpnPower();
     }
 
     public Sprite getSprite() {
