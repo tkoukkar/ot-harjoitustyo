@@ -25,4 +25,11 @@ päivä | aika | mitä tein
 14.4. |6| törmäysten tutkimisen toteutus, hahmojen tuhoutumisen kehitys, refaktorointi
 15.4. |5| käyttöliittymän kehitys, refaktorointi, pistelaskusysteemin toteutus, testien luominen
 16.4. |4| koodin siistiminen, sekvenssikaavion piirtäminen ja muun dokumentaation päivitykset
-yht. |86| 
+18.4. |2| sovelluslogiikan kehitys, refaktorointi
+19.4. |3| aluksen datan siirto ulkoiseen tiedostoon ja vastaavan DAO:n luominen; JavaFX:ään perehtyminen, piste-ennätysnäkymän alustava toteutus
+20.4. |3| JavaFX:ään perehtyminen, piste-ennätysnäkymän kehitys; käyttöliittymän kehitys
+21.4. |4| JavaFX:ään perehtyminen, piste-ennätysnäkymän kehitys ja pisteiden haku ulkoisesta tiedostosta, vastaavan DAO:n luominen
+23.4. |5| tietokantojen perusteiden kertaus, pisteiden haku ja tallennus tietokannan avulla, piste-ennätysnäkymän ja DAO:n kehitys
+24.4. |3| käyttöliittymän ja sovelluslogiikan kehitys, refaktorointi
+25.4. |6| sovelluslogiikan kehitys, refaktorointi, testien luominen, dokumentaatio
+yht. |112| 
