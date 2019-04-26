@@ -5,7 +5,9 @@
 Ohjelman käynnistyessä avautuu päävalikko, jossa valittavana on seuraavat vaihtoehdot:
 
 **Uusi peli** - aloittaa uuden pelin
+
 **Ennätykset** - näyttää listan parhaita tuloksia, jotka pelissä on saavutettu
+
 **Lopeta** - sulkee ohjelman
 
 ## Pelin kulku
@@ -23,9 +25,12 @@ Murikoiden ampumisesta saa pisteitä, kun taas avaruusaluksen törmätessä muri
 
 Avaruusalusta ohjataan näppäimistöllä. Näppäinkomennot ovat seuraavat:
 
-**← (vasen nuolinäppäin) - käänny aluksen keulan osoittamaan suuntaan nähden vasemmalle
+**← (vasen nuolinäppäin)** - käänny aluksen keulan osoittamaan suuntaan nähden vasemmalle
+
 **→ (oikea nuolinäppäin)** - käänny aluksen keulan osoittamaan suuntaan nähden oikealle
+
 **↑ (ylös-nuolinäppäin)** - kiihdytä aluksen keulan osoittamaan suuntaan
+
 **välilyönti** - ammu
 
 ## Piste-ennätykset
