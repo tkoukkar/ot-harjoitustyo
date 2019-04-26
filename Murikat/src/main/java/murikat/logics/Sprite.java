@@ -6,16 +6,13 @@ package murikat.logics;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author tkoukkar
- */
-
-import java.util.HashSet;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
-import javafx.scene.paint.Color;
 
+/**
+ * Liikkuvaa kappaletta edustava luokka
+ * @author tkoukkar
+ */
 public class Sprite {
     private Polygon form;
     private Point2D velocity;
@@ -39,21 +36,12 @@ public class Sprite {
         return this.form;
     }
     
-    public void rotate(double deg) {
-        this.form.setRotate(this.form.getRotate() + deg);
-    }
-
     public double getPositionX() {
         return this.form.getTranslateX();
     }
 
     public double getPositionY() {
         return this.form.getTranslateY();
-    }
-
-    public void moveTo(double x, double y) {
-        this.form.setTranslateX(x);
-        this.form.setTranslateY(y);
     }
     
     public Point2D getVelocity() {
@@ -64,6 +52,36 @@ public class Sprite {
         this.velocity = v;
     }
     
+    /**
+     * Kääntää kappaletta ruudulla esittävää monikulmiota.
+     * <p>
+     * Metodi lisää kappaletta esittävän monikulmion nykyiseen rotaatioon parametrina saadun määrän asteita.
+     * Parametrin positiivisilla arvoilla kappale kääntyy myötäpäivään ja negatiivisilla vastapäivään.
+     * </p>
+     * 
+     * @param deg käännöksen suuruus asteina
+     */
+    public void rotate(double deg) {
+        this.form.setRotate(this.form.getRotate() + deg);
+    }
+    
+    /**
+     * Siirtää kappaletta ruudulla esittävän monikulmion parametreina annettujen koordinaattien mukaiseen sijaintiin.
+     * 
+     * @param x uuden sijainnin x-koordinaatti
+     * @param y uuden sijainnin y-koordinaatti
+     */
+    public void moveTo(double x, double y) {
+        this.form.setTranslateX(x);
+        this.form.setTranslateY(y);
+    }
+    
+    /**
+     * Kiihdyttää kappaleen liikettä parametrina annettuun suuntaan toisena parametrina annetun nopeusvektorin verran.
+     * 
+     * @param dir kiihdytyssuunta
+     * @param v kiihdytyksen suuruus
+     */
     public void accelerate(double dir, double v) {
         double xComp = Math.cos(Math.toRadians(this.form.getRotate() + dir)) * v;
         double yComp = Math.sin(Math.toRadians(this.form.getRotate() + dir)) * v;
@@ -71,6 +89,14 @@ public class Sprite {
         this.velocity = this.velocity.add(xComp, yComp);
     }
     
+    /**
+     * Luo uuden kappaleen (Sprite-olion) tämän kappaleen sijaintiin ja asettaa sille saatujen parametrien mukaisen lähtönopeuden. Palauttaa luodun kappaleen.
+     * 
+     * @param p uutta kappaletta vastaava monikulmio
+     * @param dir suunta, johon uusi kappale lähtee
+     * @param v nopeus, jolla uusi kappale lähtee liikkeelle
+     * @return luotu kappale
+     */
     public Sprite emitProjectile(Polygon p, double dir, double v) {
         Sprite projectile = new Sprite(p, this.form.getTranslateX() + 8, this.form.getTranslateY());
         
@@ -78,7 +104,7 @@ public class Sprite {
         
         return projectile;
     }
-    
+       
     public void setHitPts(int value) {
         this.hitPts = value;
     }
@@ -87,6 +113,9 @@ public class Sprite {
         return this.hitPts;
     }
     
+    /**
+     * Merkitsee kappaleen tuhotuksi ja poistaa sitä esittävän monikulmion ruudulta.
+     */
     public void destroy() {
         this.getForm().setVisible(false);
         this.destroyed = true;

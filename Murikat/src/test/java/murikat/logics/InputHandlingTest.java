@@ -1,3 +1,5 @@
+package murikat.logics;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +9,7 @@
 import murikat.logics.Sprite;
 import murikat.logics.Spaceship;
 import murikat.logics.InputHandler;
+import murikat.dao.SpaceshipDao;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,9 +39,7 @@ public class InputHandlingTest {
         w = 200;
         h = 200;
         
-        Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(p, w / 2, h / 2);
-        ship = new Spaceship(shipSprite);
+        ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
         
         iph = new InputHandler(ship);
     }

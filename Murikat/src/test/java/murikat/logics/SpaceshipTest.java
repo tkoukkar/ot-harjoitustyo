@@ -1,21 +1,18 @@
+package murikat.logics;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import murikat.logics.Sprite;
-import murikat.logics.Spaceship;
+import murikat.dao.SpaceshipDao;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import javafx.stage.Stage;
-import javafx.scene.shape.Polygon;
 
 /**
  *
@@ -42,9 +39,7 @@ public class SpaceshipTest {
         w = 200;
         h = 200;
         
-        Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
-        Sprite shipSprite = new Sprite(p, w / 2, h / 2);
-        ship = new Spaceship(shipSprite);
+        ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
     }
     
     @After
@@ -63,8 +58,18 @@ public class SpaceshipTest {
     }
     
     @Test
-    public void shipTestSpriteExists() {
+    public void shipConstructorTestSpriteExists() {
         assertNotNull(ship.getSprite());
+    }
+    
+    @Test
+    public void shipConstructorTestPositionX() {
+        assertEquals(w / 2, ship.getSprite().getPositionX(), 1);
+    }
+    
+    @Test
+    public void shipConstructorTestPositionY() {
+        assertEquals(h / 2, ship.getSprite().getPositionY(), 1);
     }
     
     @Test

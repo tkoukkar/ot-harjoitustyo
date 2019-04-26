@@ -1,3 +1,5 @@
+package murikat.logics;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +12,7 @@ import static murikat.gui.MurikatUi.w;
 import murikat.logics.Spaceship;
 import murikat.logics.Sprite;
 import murikat.logics.SpriteHandler;
+import murikat.dao.SpaceshipDao;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
@@ -40,7 +43,9 @@ public class SpriteHandlingTest {
         Pane testPane = new Pane();
         testPane.setPrefSize(w, h);
         
-        sph = new SpriteHandler(testPane);
+        Spaceship ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
+        
+        sph = new SpriteHandler(testPane, ship.getSprite());
     }
     
     @After
@@ -52,34 +57,6 @@ public class SpriteHandlingTest {
     //
     // @Test
     // public void hello() {}
-    
-    @Test
-    public void shipBuildingTestShipExists() {
-        Spaceship ship = sph.buildSpaceship();
-        
-        assertNotNull(ship);
-    }
-    
-    @Test
-    public void shipBuildingTestShipSpriteExists() {
-        Spaceship ship = sph.buildSpaceship();
-        
-        assertNotNull(ship.getSprite());
-    }
-    
-    @Test
-    public void shipBuildingTestShipPositionX() {
-        Spaceship ship = sph.buildSpaceship();
-        
-        assertEquals(w / 2, ship.getSprite().getPositionX(), 1);
-    }
-    
-    @Test
-    public void shipBuildingTestShipPositionY() {
-        Spaceship ship = sph.buildSpaceship();
-        
-        assertEquals(h / 2, ship.getSprite().getPositionY(), 1);
-    }
     
     @Test
     public void movementProcessingTestPositionX() {
@@ -150,6 +127,49 @@ public class SpriteHandlingTest {
     }
     
     @Test
+    public void collisionProcessingTestReturnTrueIfCollisionOccurs() {
+        for (int i = 0; i <= w; i++) {
+            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
+            Sprite s = new Sprite(p, i, 0);
+            sph.addSprite(s);
+        }
+        
+        sph.spawnRock(1);
+        
+        Boolean q = sph.processCollisions();
+        assertEquals(true, q);
+    }
+    
+    @Test
+    public void collisionProcessingTestReturnFalseIfCollisionDoesNotOccur() {
+        for (int i = 0; i <= w; i++) {
+            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
+            Sprite s = new Sprite(p, i, h / 2);
+            sph.addSprite(s);
+        }
+        
+        sph.spawnRock(1);
+        
+        Boolean q = sph.processCollisions();
+        assertEquals(false, q);
+    }
+    
+    @Test
+    public void collisionProcessingTestRockBreaksInTwoIfCollisionOccurs() {
+        for (int i = 0; i <= w; i++) {
+            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
+            Sprite s = new Sprite(p, i, 0);
+            sph.addSprite(s);
+        }
+        
+        sph.spawnRock(1);
+        
+        Boolean q = sph.processCollisions();
+        
+        assertEquals(2, sph.getNumberOfRocks());
+    }
+    
+    @Test
     public void destructionProcessingTestSpriteWithZeroHpDestroyed() {
         Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
         Sprite s = new Sprite(p, w / 2, h / 2);
@@ -159,7 +179,7 @@ public class SpriteHandlingTest {
         s.setHitPts(0);
         
         sph.processDestruction();
-        
+                
         assertTrue(s.isDestroyed());
     }
     

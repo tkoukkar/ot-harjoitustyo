@@ -1,20 +1,19 @@
+package murikat.logics;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-package murikat.logics;
-
-/**
- *
- * @author tkoukkar
- */
-
 import java.util.HashSet;
 
 import javafx.scene.input.KeyCode;
 
+/**
+ * Näppäinkomentojen käsittelystä vastaava luokka
+ * @author tkoukkar
+ */
 public class InputHandler {
     private HashSet<KeyCode> keys;
     private Spaceship ship;
@@ -26,10 +25,23 @@ public class InputHandler {
         this.triggerState = 0;
     }
     
+    /**
+     * Lisää käyttäjän painaman näppäimen koodin käsiteltäväksi.
+     * 
+     * @param kc painetun näppäimen näppäinkoodi
+     */
     public void input(KeyCode kc) {
         this.keys.add(kc);
     }
     
+    /**
+     * Poistaa näppäinkomennon käsiteltävien joukosta.
+     * <p>
+     * Välilyönnin tapauksessa nollataan liipaisimen tilaa kuvastavan muuttujan arvo.
+     * </p>
+     * 
+     * @param kc poistettavan näppäimen koodi
+     */
     public void remove(KeyCode kc) {
         this.keys.remove(kc);
         
@@ -38,6 +50,13 @@ public class InputHandler {
         }
     }
     
+    /**
+     * Käsittelee näppäinkomennot ja säätelee niiden perusteella avaruusaluksen liikettä ja/tai liipasimen tilaa.
+     * <p>
+     * Metodi käy läpi listalla olevat näppäinkomennot ja kutsuu kutakin niistä vastaavaa avaruusaluksen kääntö- tai kiihdytysmetodia, 
+     * tai liipasinnäppäimen (välilyönti) tapauksessa kasvattaa liipaisimen tilaa kuvastavan muuttujan arvoa.
+     * </p>
+     */
     public void processControls() {
         this.keys.forEach(c -> {
             if (c.equals(KeyCode.LEFT)) {
@@ -58,6 +77,11 @@ public class InputHandler {
         });
     }
     
+    /**
+     * Palauttaa liipaisimen tilan; arvo on sitä suurempi, mitä pidempään liipaisin on ollut painettuna.
+     * 
+     * @return liipaisimen tila
+     */
     public int getTriggerState() {
         return this.triggerState;
     }
