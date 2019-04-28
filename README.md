@@ -44,6 +44,6 @@ Tiedosto generoidaan hakemistoon *target* nimellä *Murikat-1.0-SNAPSHOT.jar*.
 
 Tiedoston [checkstyle.xml](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/checkstyle.xml) määrittelemät tarkastukset suoritetaan komennolla:
 
-`mvn jxr:jxr checkstyle:checkstyle`
+`mvn test jxr:jxr checkstyle:checkstyle`
 
 Mahdolliset virheilmoitukset generoidaan tiedostoon *target/site/checkstyle.html*, jonka voi avata selaimella.
