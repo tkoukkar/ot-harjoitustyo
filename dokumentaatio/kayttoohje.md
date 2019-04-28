@@ -12,12 +12,11 @@ Ohjelman käynnistyessä avautuu päävalikko, jossa valittavana on seuraavat va
 
 ## Pelin kulku
 
-Peli alkaa, kun pelaaja napsauttaa päävalikossa Uusi peli -painiketta. Pelin alussa pelialueen keskellä näkyy valkoinen
-avaruusalus ja pelialueen laidoilla neljä harmaata murikkaa, jotka lähtevät liikkeelle satunnaisiin suuntiin.
-Pelaajan tehtävänä on ohjata avaruusalusta ja ampua sillä murikoita sekä välttää niihin osumista.
+Peli alkaa, kun pelaaja napsauttaa päävalikossa Uusi peli -painiketta. Pelin alussa pelialueen keskellä näkyy valkoinen avaruusalus ja pelialueen laidoilla neljä harmaata murikkaa, jotka lähtevät liikkeelle satunnaisiin suuntiin. Pelaajan tehtävänä on ohjata avaruusalusta ja ampua sillä murikoita sekä välttää niihin osumista. Ruudun vasemmassa yläkulmassa näkyvät pelaajan keräämät pisteet.
 
-Kun pelaaja osuu aseella murikkaan, murikka halkeaa kahtia ja puolikkaat jatkavat liikettä eri suuntiin. Puolikkaat murikat
-käyttäytyvät muutoin samoin kuin alkuperäiset, mutta ne tuhoutuvat ammuttaessa.
+Kun pelaaja osuu aseella murikkaan, murikka halkeaa kahtia ja puolikkaat jatkavat liikettä eri suuntiin. Puolikkaat murikat käyttäytyvät muutoin samoin kuin alkuperäiset, mutta ne tuhoutuvat ammuttaessa.
+
+Myös uusia isoja murikoita ilmestyy satunnaisin väliajoin lisää pelialueen laidoille; todennäköisyys riippuu yhtäältä pelaajan keräämistä pisteistä ja toisaalta pelialueella kulloinkin jo olevien murikoiden määrästä.
 
 Murikoiden ampumisesta saa pisteitä, kun taas avaruusaluksen törmätessä murikkaan peli päättyy.
 
