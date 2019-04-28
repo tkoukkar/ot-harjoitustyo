@@ -22,28 +22,28 @@ Sovellus on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella, 
 
 ### Testaus
 
-Testit suoritetaan komennolla
+Testit suoritetaan komennolla:
 
 `mvn test`
 
-Testikattavuusraportti luodaan komennolla
+Mikäli testeistä halutaan luoda kattavuusraportti, komento tulee antaa muodossa:
 
 `mvn test jacoco:report`
 
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto *target/site/jacoco/index.html*.
+Kattavuusraportti muodostuu tiedostoon *target/site/jacoco/index.html*, jonka voi avata selaimella.
 
 ### Suoritettavan jarin generointi
 
-Komento
+Suoritettava jar-tiedosto generoidaan komennolla:
 
 `mvn package`
 
-generoi hakemistoon *target* suoritettavan jar-tiedoston *Murikat-1.0-SNAPSHOT.jar*.
+Tiedosto generoidaan hakemistoon *target* nimellä *Murikat-1.0-SNAPSHOT.jar*.
 
 ### Checkstyle
 
-Tiedoston [checkstyle.xml](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/checkstyle.xml) määrittelemät tarkastukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/checkstyle.xml) määrittelemät tarkastukset suoritetaan komennolla:
 
 `mvn jxr:jxr checkstyle:checkstyle`
 
-Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto *target/site/checkstyle.html*
+Mahdolliset virheilmoitukset generoidaan tiedostoon *target/site/checkstyle.html*, jonka voi avata selaimella.
