@@ -16,6 +16,8 @@ Sovellus on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella, 
 
 [Viikko 5](https://github.com/tkoukkar/ot-harjoitustyo/releases/tag/viikko5)
 
+[Viikko 6](https://github.com/tkoukkar/ot-harjoitustyo/releases/tag/viikko6)
+
 ## Komentorivikomennot
 
 ### Testaus
