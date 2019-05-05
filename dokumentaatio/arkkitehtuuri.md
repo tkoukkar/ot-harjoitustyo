@@ -12,7 +12,7 @@ Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-e
 
 ## Tiedon tallennus ja hakeminen
 
-Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), joita kumpaakin edustaa ohjelman normaalin suorituksen aikana yksi olio. Nämä oliot huolehtivat tiedon hakemisesta ulkoisista tiedostoista sekä uusien ennätystulosten tapauksessa myös niiden tallentamisesta ulkoiseen tiedostoon. Ohjelman käyttämien ulkoisten tiedostojen nimet ja polut on tallennettu sen juurihakemistossa sijaitsevaan tiedostoon config.properties.
+Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), joita kumpaakin edustaa ohjelman normaalin suorituksen aikana yksi olio. Nämä oliot huolehtivat tiedon hakemisesta ulkoisista tiedostoista sekä uusien ennätystulosten tapauksessa myös niiden tallentamisesta ulkoiseen tiedostoon. Ohjelman käyttämien ulkoisten tiedostojen nimet ja polut on tallennettu sen juurihakemistossa sijaitsevaan tiedostoon `config.properties`.
 
 Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa /data/scores.db. SQL-komennot välittää tietokannalle luokka *HighScoreDao*; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa *Database*. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
 
