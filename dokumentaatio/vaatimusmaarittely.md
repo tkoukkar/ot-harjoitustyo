@@ -20,8 +20,8 @@ Kyseessä on Asteroids-tyyppinen peli. Pelaajan tehtävänä on ohjata avaruusal
 * Pelissä on pistelaskuri. Pelaaja saa pisteitä tuhoamalla asteroideja ja vihollisaluksia sekä keräämällä bonuksia.
 
 ### Pelin päätyttyä
-* Pelaajan nimi ja pelin aikana kerätyt pisteet voidaan tallentaa piste-ennätyslistaan, jos niitä on riittävästi.
-* Ohjelma palautuu yllä kuvattuun aloitustilaan.
+* Ohjelma siirtyy pelaajan keräämien pisteiden riittäessä piste-ennätysnäkymään, jossa on mahdollista tallentaa pelaajan nimi ja pisteet piste-ennätyslistaan.
+* Ohjelma palautuu (tai on piste-ennätysnäkymästä palautettavissa) yllä kuvattuun aloitustilaan.
 
 ## Jatkokehitysideoita
 
@@ -32,3 +32,4 @@ Mahdollisia tulevien versioiden ominaisuuksia ovat mm. seuraavat:
 * Pelin jakaminen tasoihin, jotka vaikeutuvat esim. uudentyyppisten vihollisalusten myötä asteittain
 * Pelitilanteen tallennusmahdollisuus ainakin tasojen välissä
 * Mahdollisuus kerätä pisteiden lisäksi tai sijasta rahaa, jolla avaruusalukseen voi ostaa (esim. erillisessä tasojen välisessä näkymässä) lisää suojia, parempia aseita ym.
+* Pelaajan kulloisellakin pelikerralla keräämien pisteiden korostus piste-ennätysnäkymässä
