@@ -41,7 +41,7 @@ Jos pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliittymä
 
 Pelinäkymää luotaessa käyttöliittymä määrittelee näkymän sisältävän *Scene*-olion *setOnKeyPressed()*-toiminnan siten, että kyseisen *Scenen* ollessa ohjelman *Stagella* käyttäjän painamien näppäimien näppäinkoodit välittyvät *InputHandler*-olion metodille *input(KeyCode)*, joka tallentaa ne kyseisen olion sisältämään painettujen näppäimien listaan. Vastaavasti tämän *Scene*-olion *setOnKeyReleased()* asetetaan välittämään vapautettujen näppäimien koodit *InputHandlerin* metodille *remove(KeyCode)*, joka poistaa näppäinkoodin listalta. Jos vapautettu näppäin on liipaisin (välilyönti), nollaa tämä metodi lisäksi liipaisimen tilaa kuvaavan muuttujan *triggerState* arvon.
 
-Joka ruudunpäivityksen yhteydessä käyttöliittymä kutsuu ensimmäiseksi *InputHandler*-olion metodia *processControls()*, joka käy läpi painettujen näppäimien listan sellaisena, kuin se on kyseisen ruudunpäivityksen aikana, ja joko kutsuu aluksen kiihdytysmetodia tai sen orientaatiota muuttavia metodeja (käännökset), tai liipaisimen ollessa painettuna kasvattaa *triggerState*-muuttujan arvoa.
+Joka ruudunpäivityksen yhteydessä käyttöliittymä kutsuu ensimmäiseksi *InputHandler*-olion metodia *processControls()*, joka käy läpi painettujen näppäimien listan sellaisena, kuin se on kyseisen ruudunpäivityksen aikana, ja tarpeen mukaan kutsuu aluksen kiihdytysmetodia tai sen orientaatiota muuttavia metodeja (käännökset), tai liipaisimen ollessa painettuna kasvattaa *triggerState*-muuttujan arvoa.
 
 Aluksen kääntyminen päivittyy pelinäkymään suoraan *Sprite*-olion *setRotate(double)*-metodin välityksellä:
 
