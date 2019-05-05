@@ -68,7 +68,7 @@ Kun kappaleiden liike on käsitelty, käyttöjärjestelmä kutsuu seuraavaksi *S
 
 Ammuksen törmätessä murikkaan vähennetään sekä ammusta että osuman saanutta murikkaa kuvaavan *Spriten* osumapisteitä ja merkitään murikka poistettavaksi *RockRegistry*-olion listalta kutsumalla metodia *setHitRock(Sprite)* (parametrina kyseinen murikka). Lisäksi mikäli kyseessä on ensimmäisen tai toisen sukupolven murikka, kutsutaan murikan kahtia halkaisevaa metodia *sunder(Sprite)* (parametrina niinikään kyseinen murikka). Murikan halkaiseminen käsitellään pitkälti samoin kuin edellä kuvattu ampuminen: metodi *sunder* luo halkeamalla syntyneet kappaleet, asettaa niille suunnan sekä nopeuden ja kutsuu tämän jälkeen kahdesti halkeavaa murikkaa kuvaavan *Sprite*-olion metodia *emitProjectile(Polygon, double, double)*. Syntyneet kappaleet lisätään käsiteltävien *Sprite*-olioiden joukkoon ja niitä kuvaavat monikulmiot ruudulle. Erona ammuksiin on se, että uusia murikoita ei merkitä ammuslistalle; sen sijaan ne lisätään *RockRegistry*-olion listalle kutsumalla sen metodia *add(Sprite)* (parametrina lisättävä murikka). Lopuksi alkuperäinen halkeavaksi merkitty murikka poistetaan *RockRegistryn* listalta kutsumalla sen metodia *remove(Sprite)*.
 
-
+![sekvenssikaavio, törmäys](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/skaavio_tormays.png)
 
 Törmäys murikan ja pelaajan avaruusaluksen käsitellään kutsumalla *Spaceship*-olion metodia *collide()*, joka vähentää aluksen suojia ja vastaavasti sitä kuvaavan *Sprite*-olion osumapisteitä. Lisäksi se asettaa aluksen hetkeksi aikaa haavoittumattomaan tilaan (osoitetaan ruudulla värjäämällä alustava esittävä monikulmio punaiseksi), jotta samaa törmäystä ei käsitellä kahdesti.
 
