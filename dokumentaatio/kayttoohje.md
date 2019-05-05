@@ -4,7 +4,7 @@
 
 ## Konfigurointi
 
-Ohjelma on käynnistettävä samasta hakemistosta, kuin missä sijaitsee sen konfiguraatiotiedosto config.properties; muutoin se ei löydä tarvitsemiaan datatiedostoja.
+Ohjelma on käynnistettävä samasta hakemistosta, kuin missä sijaitsee sen konfiguraatiotiedosto *config.properties*; muutoin se ei löydä tarvitsemiaan datatiedostoja.
 
 ## Käynnistäminen
 
