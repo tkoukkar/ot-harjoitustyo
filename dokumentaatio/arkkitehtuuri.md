@@ -60,7 +60,7 @@ Jos yllä kuvatun *triggerState*-muuttujan arvo on välittömästi *InputHandler
 
 Metodi *processFiring()* tutkii, montako ammusta pelissä jo on; jos niitä on alukselle asetetun maksimiarvon verran (oletusarvoisesti kolme) tai enemmän, mitään ei tapahdu. Muussa tapauksessa se kutsuu *Spaceship*-olion metodia *fire()*, joka puolestaan kutsuu alusta vastaavan *Sprite*-olion metodia *emitProjectile(Polygon, double, double)* parametreina ammusta esittävä monikulmio, aluksen keulan osoittamaa suuntaa kuvaava kerroin 0, sekä ulkoisesta datatiedostosta haettu aluksen aseen teho. Viimeksi mainittu metodi luo ammusta vastaavan *Sprite*-olion ja asettaa sille sijainnin, suunnan ja nopeuden vastaavasti itse aluksen sijainnin ja orientaation sekä parametrina saadun aseen tehon mukaan. Tämän jälkeen luotu *Sprite* palautetaan *Spaceship*-olion metodille *fire()*, joka puolestaan palauttaa sen *SpriteHandler*-olion metodille *processFiring()*. Lopuksi *processFiring()* lisää kyseisen *Spriten* käsiteltävien *Sprite*-olioiden listalle sekä erilliselle ammuslistalle ja asettaa sitä kuvaavan monikulmion näkyväksi ruudulle.
 
-
+![sekvenssikaavio, ampuminen](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/skaavio_ampu.png)
 
 #### Törmäykset
 
