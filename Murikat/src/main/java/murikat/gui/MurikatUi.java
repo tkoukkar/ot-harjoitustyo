@@ -94,7 +94,7 @@ public class MurikatUi extends Application {
         mainTitle.setTextFill(Color.LIGHTGRAY);
         mainTitle.setFont(new Font("Arial Bold", 192));
         
-        Label versionInfo = new Label("v. 0.3");
+        Label versionInfo = new Label("v. 1.0");
         versionInfo.setTextFill(Color.LIGHTGRAY);
         versionInfo.setFont(new Font("Arial", 14));
         
