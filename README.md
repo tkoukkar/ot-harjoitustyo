@@ -1,6 +1,6 @@
 # Murikat
 
-Sovellus on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella, jolle ilmaantuu sen laidoilta ajoittain erilaisia asteroideja, vihollisaluksia ja bonusartefakteja. Näistä viimeksi mainittuja pelaajan tulee kerätä ja edellisiä puolestaan väistellä ja/tai tuhota.
+Kyseessä on Asteroids-tyyppinen peli. Pelaajan tehtävänä on ohjata avaruusalusta pelialueella, jolle ilmaantuu sen laidoilta ajoittain asteroideja eli murikoita. Tavoitteena on tuhota murikoita ampumalla niitä aluksen aseella sekä välttää niihin osumista.
 
 ## Dokumentaatio
 
