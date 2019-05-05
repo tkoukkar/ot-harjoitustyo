@@ -32,7 +32,7 @@ Pelin keskeisestä toiminnasta vastaa puolestaan luokan *SpriteHandler* ainoa ol
 
 Jokaisen ruudunpäivityksen yhteydessä kutsutaan ensin *SpriteHandler*-olion metodia, joka käsittelee kappaleiden liikkeen, ja tämän jälkeen kappaleiden mahdolliset törmäykset ja tuhoutumisen käsitteleviä metodeja. Tuhoutuneet kappaleet poistetaan pelistä, ja mikäli pelaajan avaruusalus ei tuhoutumisen käsittelyn jälkeen ole enää pelissä, peli päättyy.
 
-Mikäli pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliittymä siirtää näkymän piste-ennätyslistalle ja mahdollistaa pelaajan nimen lisäämisen listaan. Muussa tapauksessa näkymä palautuu pelin loputtua päävalikkoon.
+Jos pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliittymä siirtää näkymän piste-ennätyslistalle ja mahdollistaa pelaajan nimen lisäämisen listaan. Muussa tapauksessa näkymä palautuu pelin loputtua päävalikkoon.
 
 
 ### Keskeiset toiminnot
