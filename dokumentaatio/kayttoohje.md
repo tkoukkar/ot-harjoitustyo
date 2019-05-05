@@ -1,10 +1,10 @@
 # Käyttöohje
 
+## Asennus ja konfigurointi
 
+Lataa tiedostot murikat.jar ja config.properties haluamaasi hakemistoon (oleellista on, että molemmat ovat samassa hakemistossa). Pura samaan hakemistoon tiedoston data.zip sisältö; hakemistoon tulisi tällöin muodostua alihakemisto */data/*, jonka tulisi sisältää tiedostot *spaceship.dat* ja *scores.db* (sekä vielä erillinen alihakemisto *test*).
 
-## Konfigurointi
-
-Ohjelma on käynnistettävä samasta hakemistosta, kuin missä sijaitsee sen konfiguraatiotiedosto *config.properties*; muutoin se ei löydä tarvitsemiaan datatiedostoja.
+Ohjelma olettaa, että suoritushakemistossa on tiedosto *config.properties* sekä tarvitut datatiedostot sisältävä alihakemisto *data*; ilman näitä se ei käynnisty.
 
 ## Käynnistäminen
 
