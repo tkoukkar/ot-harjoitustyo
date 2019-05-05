@@ -39,7 +39,9 @@ Suoritettava jar-tiedosto generoidaan komennolla:
 
 `mvn package`
 
-Tiedosto generoidaan hakemistoon *target* nimellä *Murikat-1.0-SNAPSHOT.jar*.
+Tiedosto generoituu hakemistoon *target* nimellä *Murikat-1.0-SNAPSHOT.jar*. Ohjelman suorittaminen vaatii lisäksi muodostuneen jar-tiedoston siirtämisen manuaalisesti projektin juurihakemistoon (vrt. [käyttöohje](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)), eli hakemistossa *target* on annettava komento:
+
+`mv Murikat-1.0-SNAPSHOT.jar ../`
 
 ### Checkstyle
 
