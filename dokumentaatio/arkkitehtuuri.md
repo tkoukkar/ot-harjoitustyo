@@ -8,15 +8,15 @@ Ohjelmakoodi on jaettu kolmeen pakkaukseen: *murikat.gui, murikat.logics* ja *mu
 
 ## Käyttöliittymä
 
-Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-ennätyslistan sekä varsinaisen pelinäkymän. Kutakin näistä edustaa erillinen *Scene*-olio, jonka yksi *MurikatUi*-luokan metodeista luo ja asettaa näkyväksi eli sijoittaa ohjelman *Stageen*. Pelinäkymän luova metodi *run()* vastaa lisäksi käyttäjän näppäinkomentojen välittämisestä sovelluslogiikalle, sovelluslogiikan tarvittavien metodien kutsumisesta jokaisen ruudunpäivityksen yhteydestä sekä pelinäkymän päivittämisestä pelitilanteen mukaan.
+Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-ennätyslistan sekä varsinaisen pelinäkymän. Kutakin näistä edustaa erillinen *Scene*-olio, jonka yksi *MurikatUi*-luokan metodeista luo ja asettaa näkyväksi eli sijoittaa ohjelman *Stageen*. Pelinäkymän luova metodi *run()* vastaa lisäksi käyttäjän näppäinkomentojen välittämisestä sovelluslogiikalle, sovelluslogiikan tarvittavien metodien kutsumisesta jokaisen ruudunpäivityksen yhteydessä sekä pelinäkymän päivittämisestä pelitilanteen mukaan.
 
 ## Tiedon tallennus ja hakeminen
 
-Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), joita kumpaakin edustaa ohjelman normaalin suorituksen aikana yksi olio. Nämä oliot huolehtivat tiedon hakemisesta ulkoisista tiedostoista sekä uusien ennätystulosten tapauksessa myös niiden tallentamisesta ulkoiseen tiedostoon. Ohjelman käyttämien ulkoisten tiedostojen nimet ja polut on tallennettu sen juurihakemistossa sijaitsevaan tiedostoon config.properties.
+Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), joita kumpaakin edustaa ohjelman normaalin suorituksen aikana yksi olio. Nämä oliot huolehtivat tiedon hakemisesta ulkoisista tiedostoista sekä uusien ennätystulosten tapauksessa myös niiden tallentamisesta ulkoiseen tiedostoon. Ohjelman käyttämien ulkoisten tiedostojen nimet ja polut on tallennettu sen juurihakemistossa sijaitsevaan tiedostoon [config.properties](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/config.properties).
 
-Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa /data/scores.db. SQL-komennot välittää tietokannalle luokka HighScoreDao; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa Database. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
+Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa [/data/scores.db](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/data/scores.db). SQL-komennot välittää tietokannalle luokka *HighScoreDao*; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa *Database*. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
 
-Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti /data/spaceship.dat). Tiedot hakee SpaceshipDao-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
+Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti [/data/spaceship.dat](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/data/spaceship.dat)). Tiedot hakee *SpaceshipDao*-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
 
 ## Sovelluslogiikka
 
@@ -24,7 +24,7 @@ Pelin aikana animaatiota pyörittää käyttöliittymän sisältämä *Timeline*
 
 Kutakin pelin liikkuvista kappaleista kuvaa luokkaan *Sprite* kuuluva olio. Luokka sisältää tiedon kyseistä kappaletta tietokoneen ruudulla esittävän monikulmion muodosta ja väristä, sekä muuttujat, joiden avulla pidetään kirjaa sen sijainnista, orientaatiosta, liikesuunnasta ja -nopeudesta. Lisäksi luokka sisältää tiedon kappaleen tilasta pelissä; kullakin kappaleella on aluksi tietty määrä *osumapisteitä* (yleensä oletusarvoisesti yksi, pelaajan avaruusaluksella kuitenkin kolme), jotka vähenevät tietyin ehdoin kappaleiden törmätessä ja joiden loppuessa kappale merkitään tuhoutuneeksi. Luokan metodit ovat pääosin gettereitä ja settereitä, jotka vastaavasti mahdollistavat kappaleen sijainnin ja liikkeen ym. ominaisuuksien muuttamisen.
 
-Pelaajan avaruusalusta kuvaa lisäksi luokan *Spaceship* ainoa olio, joka pääosin välittää tietyin parametrein kutsuja vastaavalle *Sprite*-oliolle. Parametrien arvot luokka puolestaan hakee kutsumalla em. MurikatDao-pakkaukseen kuuluvan luokan SpaceshipDao getter-metodeja.
+Pelaajan avaruusalusta kuvaa lisäksi luokan *Spaceship* ainoa olio, joka pääosin välittää tietyin parametrein kutsuja vastaavalle *Sprite*-oliolle. Parametrien arvot luokka puolestaan hakee kutsumalla em. *murikat.dao*-pakkaukseen kuuluvan luokan SpaceshipDao getter-metodeja.
 
 *InputHandler*-luokan ainoa olio käsittelee pelaajan antamat näppäinkomennot ja kutsuu niiden mukaan *Spaceship*-olion käännös- tai kiihdytysmetodeja. Lisäksi *InputHandler* merkitsee tarvittaessa liipaisimen painetuksi tai vapautetuksi, minkä perusteella muut luokat ohjaavat aluksen aseen toimintaa.
 
@@ -32,7 +32,7 @@ Pelin keskeisestä toiminnasta vastaa puolestaan luokan *SpriteHandler* ainoa ol
 
 Jokaisen ruudunpäivityksen yhteydessä kutsutaan ensin *SpriteHandler*-olion metodia, joka käsittelee kappaleiden liikkeen, ja tämän jälkeen kappaleiden mahdolliset törmäykset ja tuhoutumisen käsitteleviä metodeja. Tuhoutuneet kappaleet poistetaan pelistä, ja mikäli pelaajan avaruusalus ei tuhoutumisen käsittelyn jälkeen ole enää pelissä, peli päättyy.
 
-Mikäli pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliittymä siirtää näkymän piste-ennätyslistalle ja mahdollistaa pelaajan nimen lisäämisen listaan. Muussa tapauksessa näkymä palautuu pelin loputtua päävalikkoon.
+Jos pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliittymä siirtää näkymän piste-ennätyslistalle ja mahdollistaa pelaajan nimen lisäämisen listaan. Muussa tapauksessa näkymä palautuu pelin loputtua päävalikkoon.
 
 
 ### Keskeiset toiminnot
@@ -41,15 +41,18 @@ Mikäli pelaajalla on pelin päättyessä riittävästi pisteitä, käyttöliitt
 
 Pelinäkymää luotaessa käyttöliittymä määrittelee näkymän sisältävän *Scene*-olion *setOnKeyPressed()*-toiminnan siten, että kyseisen *Scenen* ollessa ohjelman *Stagella* käyttäjän painamien näppäimien näppäinkoodit välittyvät *InputHandler*-olion metodille *input(KeyCode)*, joka tallentaa ne kyseisen olion sisältämään painettujen näppäimien listaan. Vastaavasti tämän *Scene*-olion *setOnKeyReleased()* asetetaan välittämään vapautettujen näppäimien koodit *InputHandlerin* metodille *remove(KeyCode)*, joka poistaa näppäinkoodin listalta. Jos vapautettu näppäin on liipaisin (välilyönti), nollaa tämä metodi lisäksi liipaisimen tilaa kuvaavan muuttujan *triggerState* arvon.
 
-Joka ruudunpäivityksen yhteydessä käyttöliittymä kutsuu ensimmäiseksi *InputHandler*-olion metodia *processControls()*, joka käy läpi painettujen näppäimien listan sellaisena, kuin se on kyseisen ruudunpäivityksen aikana, ja joko kutsuu aluksen kiihdytysmetodia tai sen orientaatiota muuttavia metodeja (käännökset), tai liipaisimen ollessa painettuna kasvattaa *triggerState*-muuttujan arvoa.
+Joka ruudunpäivityksen yhteydessä käyttöliittymä kutsuu ensimmäiseksi *InputHandler*-olion metodia *processControls()*, joka käy läpi painettujen näppäimien listan sellaisena, kuin se on kyseisen ruudunpäivityksen aikana, ja tarpeen mukaan kutsuu aluksen kiihdytysmetodia tai sen orientaatiota muuttavia metodeja (käännökset), tai liipaisimen ollessa painettuna kasvattaa *triggerState*-muuttujan arvoa.
 
-Aluksen kääntyminen päivittyy pelinäkymään suoraan *Sprite*-olion *setRotate(double)*-metodin välityksellä:
+Aluksen kääntyminen päivittyy pelinäkymään suoraan *Sprite*-olion *rotate(double)*-metodin välityksellä<sup>1</sup>:
 
+![sekvenssikaavio, käännös](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/skaavio_kaannos.png)
 
+<p><sup>1</sup> <sub>Tarkkaan ottaen <i>Sprite</i> kutsuu JavaFX-kirjastoon kuuluvan monikulmiota edustavan <i>Polygon</i>-luokan metodia  <i>getRotate()</i> selvittääkseen kappaleen nykyisen orientaation, lisää siihen (tai vasemmalle käännyttäessä vähentää siitä) kolme astetta ja antaa tuloksen parametrina <i>Polygon</i>-luokan metodille <i>setRotate(double)</i>, minkä perusteella kappaleen orientaatio ohjelman <i>Stagella</i> olevaan <i>Sceneen</i> sisältyvällä <i>Panella</i> päivitetään. Yksinkertaisuuden vuoksi sekvenssikaavioon on kuitenkin merkitty vain ohjelman omat luokat.</sub><br>
+<br></p>
 
-*InputHandler*-olion metodien suorituksen jälkeen käyttöliittymä kutsuu *SpriteHandler*-olion metodia *processMovement()* (tai tietyissä tilanteissa sitä ennen metodia *processFiring()*; ks. alla). Tämä käy yksitellen läpi kaikki pelissä olevat *Sprite*t selvittäen niiden nykyisen sijainnin ja liikkeen sekä määrittäen niille uuden näiden perusteella uuden sijainnin. Esimerkkinä tilanne, jossa pelaajan avaruusalus lähtee liikkeelle pelin alussa (yksinkertaisuuden vuoksi kaaviosta on jätetty pois pelissä olevat murikat, joista kutakin kuvaavan *Spriten* vastaavia liikkumismetodeja myös kutsutaan saman processMovement()-metodin aikana):
+*InputHandler*-olion metodien suorituksen jälkeen käyttöliittymä kutsuu *SpriteHandler*-olion metodia *processMovement()* (tai tietyissä tilanteissa sitä ennen metodia *processFiring()*; ks. alla). Tämä käy yksitellen läpi kaikki pelissä olevat *Sprite*-oliot selvittäen niiden nykyisen sijainnin ja liikkeen sekä määrittäen niille uuden näiden perusteella uuden sijainnin, jonka koordinaatit annetaan parametriksi kyseisen *Spriten* metodille *moveTo(double, double)*. Esimerkkinä tilanne, jossa pelaajan avaruusalus lähtee liikkeelle pelin alussa (yksinkertaisuuden vuoksi kaaviosta on jätetty pois pelissä olevat murikat, joista kutakin kuvaavan *Spriten* vastaavia liikkumismetodeja myös kutsutaan saman processMovement()-metodin aikana):
 
-![sekvenssikaavio](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio_murikat_viikko5.png)
+![sekvenssikaavio, kiihdytys](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/skaavio_kiihdytys.png)
 
 #### Ampuminen
 
@@ -57,7 +60,7 @@ Jos yllä kuvatun *triggerState*-muuttujan arvo on välittömästi *InputHandler
 
 Metodi *processFiring()* tutkii, montako ammusta pelissä jo on; jos niitä on alukselle asetetun maksimiarvon verran (oletusarvoisesti kolme) tai enemmän, mitään ei tapahdu. Muussa tapauksessa se kutsuu *Spaceship*-olion metodia *fire()*, joka puolestaan kutsuu alusta vastaavan *Sprite*-olion metodia *emitProjectile(Polygon, double, double)* parametreina ammusta esittävä monikulmio, aluksen keulan osoittamaa suuntaa kuvaava kerroin 0, sekä ulkoisesta datatiedostosta haettu aluksen aseen teho. Viimeksi mainittu metodi luo ammusta vastaavan *Sprite*-olion ja asettaa sille sijainnin, suunnan ja nopeuden vastaavasti itse aluksen sijainnin ja orientaation sekä parametrina saadun aseen tehon mukaan. Tämän jälkeen luotu *Sprite* palautetaan *Spaceship*-olion metodille *fire()*, joka puolestaan palauttaa sen *SpriteHandler*-olion metodille *processFiring()*. Lopuksi *processFiring()* lisää kyseisen *Spriten* käsiteltävien *Sprite*-olioiden listalle sekä erilliselle ammuslistalle ja asettaa sitä kuvaavan monikulmion näkyväksi ruudulle.
 
-
+![sekvenssikaavio, ampuminen](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/skaavio_ampu.png)
 
 #### Törmäykset
 
