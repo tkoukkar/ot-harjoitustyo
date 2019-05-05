@@ -21,6 +21,8 @@ Kyseessä on Asteroids-tyyppinen peli. Pelaajan tehtävänä on ohjata avaruusal
 
 [Viikko 6](https://github.com/tkoukkar/ot-harjoitustyo/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/tkoukkar/ot-harjoitustyo/releases/tag/murikat_vk7)
+
 ## Komentorivikomennot
 
 ### Testaus
