@@ -43,9 +43,9 @@ Pelinäkymää luotaessa käyttöliittymä määrittelee näkymän sisältävän
 
 Joka ruudunpäivityksen yhteydessä käyttöliittymä kutsuu ensimmäiseksi *InputHandler*-olion metodia *processControls()*, joka käy läpi painettujen näppäimien listan sellaisena, kuin se on kyseisen ruudunpäivityksen aikana, ja tarpeen mukaan kutsuu aluksen kiihdytysmetodia tai sen orientaatiota muuttavia metodeja (käännökset), tai liipaisimen ollessa painettuna kasvattaa *triggerState*-muuttujan arvoa.
 
-Aluksen kääntyminen päivittyy pelinäkymään suoraan *Sprite*-olion *setRotate(double)*-metodin välityksellä:
+Aluksen kääntyminen päivittyy pelinäkymään suoraan *Sprite*-olion *rotate(double)*-metodin välityksellä<sup>1</sup>:
 
-
+ <sup>1</sup> <sub>Tarkkaan ottaen *Sprite* kutsuu JavaFX-kirjastoon kuuluvan monikulmiota edustavan *Polygon*-luokan metodeja  *getRotate()* selvittääkseen kappaleen nykyisen orientaation, lisää siihen (tai vasemmalle käännyttäessä vähentää siitä) kolme astetta ja antaa tuloksen parametrina *Polygon*-luokan metodille *setRotate(double)*, minkä perusteella kappaleen orientaatio ohjelman *Stagella* olevaan *Sceneen* sisältyvällä *Panella* päivitetään. Yksinkertaisuuden vuoksi sekvenssikaavioon on kuitenkin merkitty vain ohjelman omat luokat.</sub>
 
 *InputHandler*-olion metodien suorituksen jälkeen käyttöliittymä kutsuu *SpriteHandler*-olion metodia *processMovement()* (tai tietyissä tilanteissa sitä ennen metodia *processFiring()*; ks. alla). Tämä käy yksitellen läpi kaikki pelissä olevat *Sprite*t selvittäen niiden nykyisen sijainnin ja liikkeen sekä määrittäen niille uuden näiden perusteella uuden sijainnin. Esimerkkinä tilanne, jossa pelaajan avaruusalus lähtee liikkeelle pelin alussa (yksinkertaisuuden vuoksi kaaviosta on jätetty pois pelissä olevat murikat, joista kutakin kuvaavan *Spriten* vastaavia liikkumismetodeja myös kutsutaan saman processMovement()-metodin aikana):
 
