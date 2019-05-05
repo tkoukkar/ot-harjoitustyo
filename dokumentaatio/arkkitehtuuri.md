@@ -16,7 +16,7 @@ Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), j
 
 Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa ![/data/scores.db](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/data/scores.db). SQL-komennot välittää tietokannalle luokka *HighScoreDao*; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa *Database*. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
 
-Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti ![/data/spaceship.dat](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/data/spaceship.dat). Tiedot hakee *SpaceshipDao*-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
+Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti ![/data/spaceship.dat](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/Murikat/data/spaceship.dat)). Tiedot hakee *SpaceshipDao*-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
 
 ## Sovelluslogiikka
 
