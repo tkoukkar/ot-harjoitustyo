@@ -32,4 +32,10 @@ päivä | aika | mitä tein
 23.4. |5| tietokantojen perusteiden kertaus, pisteiden haku ja tallennus tietokannan avulla, piste-ennätysnäkymän ja DAO:n kehitys
 24.4. |3| käyttöliittymän ja sovelluslogiikan kehitys, refaktorointi
 25.4. |6| sovelluslogiikan kehitys, refaktorointi, testien luominen, dokumentaatio
-yht. |112| 
+28.4. |4| aluksen suojien toiminta, käyttöliittymän ja sovelluslogiikan kehitys, refaktorointi
+29.4. |3| aluksen suojien toiminta, murikoiden halkeaminen, käyttöliittymän ja sovelluslogiikan kehitys, refaktorointi
+2.5. |1| käyttöliittymän kehitys
+3.5. |5| käyttöliittymän ja sovelluslogiikan kehitys, refaktorointi, testien luominen ja päivitys
+4.5. |4| koodin siistiminen, testien luominen ja päivitys, dokumentaatio
+5.5. |6| koodin siistiminen, testaus, dokumentaatio
+yht. |135| 
