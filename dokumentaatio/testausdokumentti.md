@@ -1,6 +1,6 @@
 # Testausdokumentti
 
-Sovelluksen toimivuutta on testattu sekä manuaalisesti että automaattisilla JUnit-testeillä.
+Sovelluksen toimivuutta on testattu sekä manuaalisesti että automaattisilla JUnit-testeillä. Käyttöliittymä on kuitenkin jätetty JUnit-testauksen ulkopuolelle ja testattu ainoastaan manuaalisesti.
 
 ## Yksikkö- ja integraatiotestaus
 
@@ -18,7 +18,9 @@ Luokka HighScoresTest testaa luokkaa HighScoreDao (sekä siihen liittyvää apul
 
 ### Testauskattavuus
 
-jotain
+Sovelluslogiikan osalta JUnit-testeillä on 94 % rivikattavuus ja 77 % haarautumakattavuus; DAO-luokkien osalta kumpikin on noin 80 %.
+
+![testikattavuus](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/testikattavuus.png)
 
 Luokka HighScoresTest testaa luokan HighScoreDao toiminnan vain yhdenlaisella testitietokannalla; testaamatta jäävät tilanteet, joissa tietokannassa on yli 20 tulosta sekä sellaiset, joissa tietokantaa ei ole. Myöskään uuden tuloksen lisäämistä tietokantaan ei nykyisessä toteutuksessa testata.
 
