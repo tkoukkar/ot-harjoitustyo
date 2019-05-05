@@ -108,11 +108,11 @@ public class HighScoresTest {
     }
     
     @Test
-    public void getLastNumberOnListReturnsTwentiethIfListIsFull() throws SQLException {
+    public void getLastNumberOnListReturnsNineteenthIfListIsFull() throws SQLException {
         for (int i = 1; i < 42; i++) {
             dao.getScores().add(i);
         }
         
-        assertEquals(dao.getLast(), 20);
+        assertEquals(dao.getLast(), 19);
     }
 }
