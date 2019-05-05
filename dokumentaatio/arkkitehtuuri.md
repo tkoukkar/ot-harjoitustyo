@@ -14,9 +14,9 @@ Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-e
 
 Pakkauksessa *murikat.dao* sijaitsee kaksi DAO-luokkaa (*Data Access Object*), joita kumpaakin edustaa ohjelman normaalin suorituksen aikana yksi olio. Nämä oliot huolehtivat tiedon hakemisesta ulkoisista tiedostoista sekä uusien ennätystulosten tapauksessa myös niiden tallentamisesta ulkoiseen tiedostoon. Ohjelman käyttämien ulkoisten tiedostojen nimet ja polut on tallennettu sen juurihakemistossa sijaitsevaan tiedostoon `config.properties`.
 
-Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa /data/scores.db. SQL-komennot välittää tietokannalle luokka *HighScoreDao*; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa *Database*. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
+Ennätystulokset tallennetaan SQL-tietokantaan, joka oletusarvoisesti sijaitsee tiedostossa `/data/scores.db`. SQL-komennot välittää tietokannalle luokka *HighScoreDao*; tietokantayhteyden ylläpitoon käytetään toisteisen koodin välttämiseksi lisäksi apuluokkaa *Database*. Tietokannasta haettu data kirjataan ArrayList-listoille, joiden getter-metodeja kutsumalla käyttöliittymän ennätysnäkymän luova metodi muodostaa ennätysnäkymässä näkyvät listat.
 
-Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti /data/spaceship.dat). Tiedot hakee *SpaceshipDao*-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
+Pelaajan avaruusaluksen ominaisuuksia kuvaavien muuttujien arvot haetaan nykyisessä toteutuksessa suurelta osin (ja tulevaisuudessa mahdollisesti kokonaan) ulkoisesta datatiedostosta (oletusarvoisesti `/data/spaceship.dat`). Tiedot hakee *SpaceshipDao*-olio, joka tallentaa ne omien muuttujiensa arvoiksi ja jonka getter-metodeja kutsumalla sovelluslogiikka saa ne käyttöönsä.
 
 ## Sovelluslogiikka
 
