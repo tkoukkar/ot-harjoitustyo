@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Kyseessä on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella, jolle ilmaantuu sen laidoilta ajoittain erilaisia asteroideja, vihollisaluksia ja bonusartefakteja. Näistä viimeksi mainittuja pelaajan tulee kerätä ja edellisiä puolestaan väistellä ja/tai tuhota.
+Kyseessä on Asteroids-tyyppinen peli. Pelaajan tehtävänä on ohjata avaruusalusta pelialueella, jolle ilmaantuu sen laidoilta ajoittain asteroideja eli *murikoita*. Tavoitteena on tuhota murikoita ampumalla niitä aluksen aseella sekä välttää niihin osumista. Murikoiden tuhoamisesta saa pisteitä, kun taas niihin törmääminen heikentää aluksen suojia ja lopulta tuhoaa itse aluksen. Pelaajan aluksen tuhoutuessa peli päättyy.
 
 ## Perusversion tarjoama toiminnallisuus
 
@@ -15,8 +15,8 @@ Kyseessä on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella,
 ### Pelin aikana
 
 * Pelaaja voi ohjata avaruusalusta eri suuntiin.
-* Avaruusaluksella on ase, jolla voi ampua asteroideja ja vihollisaluksia.
-* Avaruusaluksella on alussa tietty määrä suojia. Suojat vähenevät asteroidin tai vihollisaluksen osumasta, ja niiden loputtua seuraava osuma tuhoaa aluksen, jolloin peli päättyy.
+* Avaruusaluksella on ase, jolla voi ampua murikoita.
+* Avaruusaluksella on alussa kolme suojaa. Suojat vähenevät yhdellä aina aluksen törmätessä murikkaan; viimeisen suojan tuhoutuessa tuhoutuu myös alus itse, jolloin peli päättyy.
 * Pelissä on pistelaskuri. Pelaaja saa pisteitä tuhoamalla asteroideja ja vihollisaluksia sekä keräämällä bonuksia.
 
 ### Pelin päätyttyä
@@ -25,9 +25,10 @@ Kyseessä on Asteroids-tyyppinen peli. Pelaaja ohjaa avaruusalusta pelialueella,
 
 ## Jatkokehitysideoita
 
-Sovelluksesta pyritään tekemään mahdollisimman helposti muokattava ja laajennettava. Mahdollisimman paljon alusten, vihollisten ym. objektien ominaisuuksia olisi tarkoitus kirjoittaa varsinaisen ohjelmakoodin sijasta ulkoiseen tietokantaan tai tietokantoihin, jotta niiden lisäys ja muokkaaminen käy helpommin. Mahdollisia tulevien versioiden ominaisuuksia ovat ajan salliessa mm. seuraavat:
+Mahdollisia tulevien versioiden ominaisuuksia ovat mm. seuraavat:
 
+* Murikoiden lisäksi pelialueelle ilmestyvät vihollisalukset 
+* Pisteitä tai aluksen ominaisuuksia lisäävät bonusartefaktit
 * Pelin jakaminen tasoihin, jotka vaikeutuvat esim. uudentyyppisten vihollisalusten myötä asteittain
 * Pelitilanteen tallennusmahdollisuus ainakin tasojen välissä
 * Mahdollisuus kerätä pisteiden lisäksi tai sijasta rahaa, jolla avaruusalukseen voi ostaa (esim. erillisessä tasojen välisessä näkymässä) lisää suojia, parempia aseita ym.
-* Mahdollisuus valita pelin käyttöliittymän kieli (esim. suomi, englanti, ~~klingon~~)
