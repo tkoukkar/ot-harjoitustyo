@@ -79,10 +79,10 @@ public class HighScoreDao {
     }
     
     public int getLast() {
-        if (this.scores.size() < 20) {
+        if (this.scores.size() < 19) {
             return 0;
         }
         
-        return this.scores.get(19);
+        return this.scores.get(18);
     }
 }
