@@ -10,6 +10,8 @@ Kyseessä on Asteroids-tyyppinen peli. Pelaajan tehtävänä on ohjata avaruusal
 
 [Arkkitehtuurikuvaus](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/testausdokumentti.md)
+
 [Työaikakirjanpito](https://github.com/tkoukkar/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 
