@@ -8,7 +8,7 @@ Ohjelmakoodi on jaettu kolmeen pakkaukseen: *murikat.gui, murikat.logics* ja *mu
 
 ## Käyttöliittymä
 
-Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-ennätyslistan sekä varsinaisen pelinäkymän. Kutakin näistä edustaa erillinen *Scene*-olio, jonka yksi *MurikatUi*-luokan metodeista luo ja asettaa näkyväksi eli sijoittaa ohjelman *Stageen*. Pelinäkymän luova metodi *run()* vastaa lisäksi käyttäjän näppäinkomentojen välittämisestä sovelluslogiikalle, sovelluslogiikan tarvittavien metodien kutsumisesta jokaisen ruudunpäivityksen yhteydestä sekä pelinäkymän päivittämisestä pelitilanteen mukaan.
+Käyttöliittymä sisältää kolme erillistä näkymää: päävalikon, piste-ennätyslistan sekä varsinaisen pelinäkymän. Kutakin näistä edustaa erillinen *Scene*-olio, jonka yksi *MurikatUi*-luokan metodeista luo ja asettaa näkyväksi eli sijoittaa ohjelman *Stageen*. Pelinäkymän luova metodi *run()* vastaa lisäksi käyttäjän näppäinkomentojen välittämisestä sovelluslogiikalle, sovelluslogiikan tarvittavien metodien kutsumisesta jokaisen ruudunpäivityksen yhteydessä sekä pelinäkymän päivittämisestä pelitilanteen mukaan.
 
 ## Tiedon tallennus ja hakeminen
 
