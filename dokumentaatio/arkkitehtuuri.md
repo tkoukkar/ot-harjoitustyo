@@ -24,7 +24,7 @@ Pelin aikana animaatiota pyörittää käyttöliittymän sisältämä *Timeline*
 
 Kutakin pelin liikkuvista kappaleista kuvaa luokkaan *Sprite* kuuluva olio. Luokka sisältää tiedon kyseistä kappaletta tietokoneen ruudulla esittävän monikulmion muodosta ja väristä, sekä muuttujat, joiden avulla pidetään kirjaa sen sijainnista, orientaatiosta, liikesuunnasta ja -nopeudesta. Lisäksi luokka sisältää tiedon kappaleen tilasta pelissä; kullakin kappaleella on aluksi tietty määrä *osumapisteitä* (yleensä oletusarvoisesti yksi, pelaajan avaruusaluksella kuitenkin kolme), jotka vähenevät tietyin ehdoin kappaleiden törmätessä ja joiden loppuessa kappale merkitään tuhoutuneeksi. Luokan metodit ovat pääosin gettereitä ja settereitä, jotka vastaavasti mahdollistavat kappaleen sijainnin ja liikkeen ym. ominaisuuksien muuttamisen.
 
-Pelaajan avaruusalusta kuvaa lisäksi luokan *Spaceship* ainoa olio, joka pääosin välittää tietyin parametrein kutsuja vastaavalle *Sprite*-oliolle. Parametrien arvot luokka puolestaan hakee kutsumalla em. MurikatDao-pakkaukseen kuuluvan luokan SpaceshipDao getter-metodeja.
+Pelaajan avaruusalusta kuvaa lisäksi luokan *Spaceship* ainoa olio, joka pääosin välittää tietyin parametrein kutsuja vastaavalle *Sprite*-oliolle. Parametrien arvot luokka puolestaan hakee kutsumalla em. *murikat.dao*-pakkaukseen kuuluvan luokan SpaceshipDao getter-metodeja.
 
 *InputHandler*-luokan ainoa olio käsittelee pelaajan antamat näppäinkomennot ja kutsuu niiden mukaan *Spaceship*-olion käännös- tai kiihdytysmetodeja. Lisäksi *InputHandler* merkitsee tarvittaessa liipaisimen painetuksi tai vapautetuksi, minkä perusteella muut luokat ohjaavat aluksen aseen toimintaa.
 
