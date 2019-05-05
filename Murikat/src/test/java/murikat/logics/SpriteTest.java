@@ -6,9 +6,6 @@ package murikat.logics;
  * and open the template in the editor.
  */
 
-import murikat.logics.Sprite;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -36,10 +33,6 @@ public class SpriteTest {
         
         p = new Polygon(-8, -8, 24, 0, -8, 8);
         s = new Sprite(p, w / 2, h / 2);
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     // TODO add test methods here.

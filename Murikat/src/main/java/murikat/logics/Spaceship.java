@@ -19,10 +19,14 @@ import javafx.geometry.Point2D;
 public class Spaceship {
     private double thrust;
     private double wpnPower;
+    private int maxProjectiles;
+    private int shields;
     
     private Sprite sprite;
     
     private SpaceshipDao shipDao;
+    
+    private int invulnerability;
     
     public Spaceship(SpaceshipDao shipDao, int x, int y) {
         this.shipDao = shipDao;
@@ -39,6 +43,12 @@ public class Spaceship {
         
         this.thrust = shipDao.getThrust();
         this.wpnPower = shipDao.getWpnPower();
+        this.maxProjectiles = shipDao.getMaxProjectiles();
+        this.shields = 3;
+        
+        this.sprite.setHitPts(this.shields);
+        
+        this.invulnerability = 0;
     }
     
     public Sprite getSprite() {
@@ -105,5 +115,46 @@ public class Spaceship {
         Sprite projectile = this.sprite.emitProjectile(p, 0, this.wpnPower);
         
         return projectile;
+    }
+    
+    /**
+     * Käsittelee tilanteen, jossa alus törmää murikkaan.
+     * 
+     * Jos alus on tällä hetkellä haavoittumattomassa tilassa, mitään ei tapahdu.
+     * Mikäli törmäyksen aiheuttama haavoittumattomuus uhkaa loppua ennen törmäyksen päättymistä (jäljellä oleva arvo 1), sitä jatketaan, jottei samaa törmäystä käsitellä kahdesti.
+     * 
+     */
+    public void collide() {
+        if (getInvulnerability() == 1) {
+            setInvulnerability(2);
+            return;
+        } else if (getInvulnerability() > 0) {
+            return;
+        }
+        
+        this.getSprite().getForm().setFill(Color.RED);
+        this.shields--;
+        this.sprite.setHitPts(this.sprite.getHitPts() - 1);
+        setInvulnerability(20);
+    }
+
+    public int getMaxProjectiles() {
+        return maxProjectiles;
+    }
+    
+    public int getShields() {
+        return this.shields;
+    }
+
+    public int getInvulnerability() {
+        return invulnerability;
+    }
+
+    public void setInvulnerability(int t) {
+        if (t == 0) {
+            this.getSprite().getForm().setFill(Color.WHITE);
+        }
+        
+        this.invulnerability = t;
     }
 }

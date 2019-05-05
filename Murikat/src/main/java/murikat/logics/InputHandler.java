@@ -51,10 +51,10 @@ public class InputHandler {
     }
     
     /**
-     * Käsittelee näppäinkomennot ja säätelee niiden perusteella avaruusaluksen liikettä ja/tai liipasimen tilaa.
+     * Käsittelee näppäinkomennot ja säätelee niiden perusteella avaruusaluksen liikettä ja/tai liipaisimen tilaa.
      * <p>
      * Metodi käy läpi listalla olevat näppäinkomennot ja kutsuu kutakin niistä vastaavaa avaruusaluksen kääntö- tai kiihdytysmetodia, 
-     * tai liipasinnäppäimen (välilyönti) tapauksessa kasvattaa liipaisimen tilaa kuvastavan muuttujan arvoa.
+     * tai liipaisinnäppäimen (välilyönti) tapauksessa kasvattaa liipaisimen tilaa kuvastavan muuttujan arvoa.
      * </p>
      */
     public void processControls() {

@@ -5,8 +5,15 @@
  */
 package murikat.dao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.sql.SQLException;
-import org.junit.After;
+
+import java.util.Properties;
+
+import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,18 +25,24 @@ import static org.junit.Assert.*;
 public class HighScoresTest {
     HighScoreDao dao;
     
+    static String testDb;
+    
     public HighScoresTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() throws FileNotFoundException, IOException {
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+        testDb = properties.getProperty("scoreTestDb");
     }
     
     @Before
     public void setUp() throws ClassNotFoundException {
-        dao = new HighScoreDao("jdbc:sqlite:data/test/scorestest.db");
+        dao = new HighScoreDao(testDb);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
@@ -73,7 +86,18 @@ public class HighScoresTest {
         
         int score = dao.getScores().get(0);
         
-        assertEquals(score, 2000);
+        assertEquals(2000, score);
+    }
+    
+    @Test
+    public void refreshTestNoDoubletsCreated() throws SQLException {
+        dao.loadData();
+
+        int s = dao.getNames().size();
+        
+        dao.refresh();
+        
+        assertEquals(s, dao.getNames().size());
     }
     
     @Test

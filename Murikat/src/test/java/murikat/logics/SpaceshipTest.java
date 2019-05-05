@@ -6,9 +6,13 @@ package murikat.logics;
  * and open the template in the editor.
  */
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import murikat.dao.SpaceshipDao;
 
-import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,27 +27,25 @@ public class SpaceshipTest {
     int w;
     int h;
     
+    static String shipDat;
+    
     public SpaceshipTest() {
     }
     
-    /* @BeforeClass
-    public static void setUpClass() {
+    @BeforeClass
+    public static void setUpClass() throws FileNotFoundException, IOException {
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+        shipDat = properties.getProperty("shipData");
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    } */
-    
+
     @Before
     public void setUp() {
         w = 200;
         h = 200;
         
-        ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
-    }
-    
-    @After
-    public void tearDown() {
+        ship = new Spaceship(new SpaceshipDao(shipDat), w / 2, h / 2);
     }
 
     // TODO add test methods here.
@@ -70,6 +72,16 @@ public class SpaceshipTest {
     @Test
     public void shipConstructorTestPositionY() {
         assertEquals(h / 2, ship.getSprite().getPositionY(), 1);
+    }
+    
+    @Test
+    public void shipConstructorTestShieldsSetToThree() {
+        assertEquals(3, ship.getShields());
+    }
+    
+    @Test
+    public void shipConstructorTestInvulnerabilityOff() {
+        assertEquals(0, ship.getInvulnerability());
     }
     
     @Test
@@ -108,5 +120,34 @@ public class SpaceshipTest {
         double y = Math.sin(Math.toRadians(-90)) * 12;
         
         assertEquals(y, p.getVelocity().getY(), 0.5);
+    }
+    
+    @Test
+    public void collisionTestInvulnerabilitySetOn() {
+        ship.collide();
+        assertEquals(20, ship.getInvulnerability());
+    }
+    
+    @Test
+    public void collisionTestShieldsReduced() {
+        ship.collide();
+        assertEquals(2, ship.getShields());
+    }
+    
+    @Test
+    public void collisionTestShieldsNotReducedWhileInvulnerable() {
+        ship.collide();
+        ship.collide();
+        ship.collide();
+        
+        assertEquals(2, ship.getShields());
+    }
+    
+    @Test
+    public void collisionTestInvulnerabilityExtendedIfAtOneDuringOngoingCollision() {
+        ship.setInvulnerability(1);
+        ship.collide();
+        
+        assertEquals(2, ship.getInvulnerability());
     }
 }

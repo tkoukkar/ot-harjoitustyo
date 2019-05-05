@@ -6,20 +6,13 @@ package murikat.logics;
  * and open the template in the editor.
  */
 
-import murikat.logics.Sprite;
-import murikat.logics.Spaceship;
-import murikat.logics.InputHandler;
 import murikat.dao.SpaceshipDao;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Polygon;
 
 /**
  *
@@ -42,10 +35,6 @@ public class InputHandlingTest {
         ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
         
         iph = new InputHandler(ship);
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     // TODO add test methods here.

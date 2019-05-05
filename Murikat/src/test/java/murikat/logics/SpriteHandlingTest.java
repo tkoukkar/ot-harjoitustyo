@@ -6,18 +6,17 @@ package murikat.logics;
  * and open the template in the editor.
  */
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import murikat.gui.MurikatUi;
-import static murikat.gui.MurikatUi.h;
-import static murikat.gui.MurikatUi.w;
-import murikat.logics.Spaceship;
-import murikat.logics.Sprite;
-import murikat.logics.SpriteHandler;
 import murikat.dao.SpaceshipDao;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
-import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,11 +27,22 @@ import static org.junit.Assert.*;
  */
 public class SpriteHandlingTest {
     SpriteHandler sph;
+    Spaceship ship;
     
     int w;
     int h;    
     
+    static String tShipDat;
+    
     public SpriteHandlingTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() throws FileNotFoundException, IOException {
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+        tShipDat = properties.getProperty("testShip");
     }
     
     @Before
@@ -43,15 +53,11 @@ public class SpriteHandlingTest {
         Pane testPane = new Pane();
         testPane.setPrefSize(w, h);
         
-        Spaceship ship = new Spaceship(new SpaceshipDao("data/spaceship.dat"), w / 2, h / 2);
+        ship = new Spaceship(new SpaceshipDao(tShipDat), w / 2, h / 2);
         
-        sph = new SpriteHandler(testPane, ship.getSprite());
+        sph = new SpriteHandler(testPane, ship);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
@@ -127,46 +133,102 @@ public class SpriteHandlingTest {
     }
     
     @Test
-    public void collisionProcessingTestReturnTrueIfCollisionOccurs() {
-        for (int i = 0; i <= w; i++) {
-            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
-            Sprite s = new Sprite(p, i, 0);
-            sph.addSprite(s);
-        }
+    public void collisionProcessingTestHitScoredEqualsGenerationOfHitRock() {
+        int q = 0;
+        ship.getSprite().getForm().setRotate(0);
         
         sph.spawnRock(1);
         
-        Boolean q = sph.processCollisions();
-        assertEquals(true, q);
+        for (int i = 0; i <= w; i++) {
+            ship.getSprite().moveTo(i, 1);
+            sph.processFiring();
+            sph.processCollisions();
+            
+            q = sph.getHitScored();
+            
+            if (q != 0) {
+                break;
+            }
+        }
+        
+        assertEquals(1, q);
     }
     
     @Test
-    public void collisionProcessingTestReturnFalseIfCollisionDoesNotOccur() {
-        for (int i = 0; i <= w; i++) {
-            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
-            Sprite s = new Sprite(p, i, h / 2);
-            sph.addSprite(s);
-        }
+    public void collisionProcessingTestHitScoredIsZeroWhenNoCollisionOccurs() {
+        int q = 0;
+        ship.getSprite().getForm().setRotate(0);
         
         sph.spawnRock(1);
+    
+        for (int i = 0; i <= w; i++) {
+            ship.getSprite().moveTo(i, h / 2);
+            sph.processFiring();
+            sph.processCollisions();
+            
+            q = sph.getHitScored();
+            
+            if (q != 0) {
+                break;
+            }
+        }
         
-        Boolean q = sph.processCollisions();
-        assertEquals(false, q);
+        assertEquals(0, q);
     }
     
     @Test
-    public void collisionProcessingTestRockBreaksInTwoIfCollisionOccurs() {
-        for (int i = 0; i <= w; i++) {
-            Polygon p = new Polygon(-2, 0, 0, 2, 2, 0, 0, -2);
-            Sprite s = new Sprite(p, i, 0);
-            sph.addSprite(s);
-        }
+    public void collisionProcessingTestRockBreaksInTwoWhenHit() {
+        int q = 0;
+        ship.getSprite().getForm().setRotate(0);
         
         sph.spawnRock(1);
         
-        Boolean q = sph.processCollisions();
+        for (int i = 0; i <= w; i++) {
+            ship.getSprite().moveTo(i, 1);
+            sph.processFiring();
+            sph.processCollisions();
+            
+            q = sph.getHitScored();
+            
+            if (q != 0) {
+                break;
+            }
+        }
         
         assertEquals(2, sph.getNumberOfRocks());
+    }
+    
+    @Test
+    public void collisionProcessingTestShipLosesShieldsWhenHit() {
+        ship.getSprite().getForm().setRotate(0);
+        
+        sph.spawnRock(1);
+        
+        for (int i = 0; i <= w; i++) {
+            ship.getSprite().moveTo(i, 1);
+            sph.processCollisions();
+        }
+        
+        assertEquals(2, ship.getShields());
+    }
+    
+    @Test
+    public void destructionProcessingTestReturnsTrueIfShipIntact() {
+        Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
+        Sprite s = new Sprite(p, w / 2, h / 2);
+        
+        sph.addSprite(s);
+        
+        s.setHitPts(0);
+        
+        assertTrue(sph.processDestruction());
+    }
+    
+    @Test
+    public void destructionProcessingTestReturnsFalseeIfShipDestroyed() {
+        ship.getSprite().setHitPts(0);
+        
+        assertFalse(sph.processDestruction());
     }
     
     @Test
@@ -184,6 +246,20 @@ public class SpriteHandlingTest {
     }
     
     @Test
+    public void destructionProcessingTestSpriteWithNonZeroHpNotDestroyed() {
+        Polygon p = new Polygon(-8, -8, 24, 0, -8, 8);
+        Sprite s = new Sprite(p, w / 2, h / 2);
+        
+        sph.addSprite(s);
+        
+        s.setHitPts(2);
+        
+        sph.processDestruction();
+                
+        assertFalse(s.isDestroyed());
+    }
+    
+    @Test
     public void rockSpawningTestNumberOfRocksIncreased() {
         sph.spawnRock(1);
         sph.spawnRock(1);
@@ -197,6 +273,15 @@ public class SpriteHandlingTest {
         sph.initRocks();
         
         assertEquals(4, sph.getNumberOfRocks());
+    }
+    
+    @Test
+    public void randomSpawningTestWithFullProbabilityNumberOfRocksIncreased() {
+        sph.processRandomSpawn(15999);
+        sph.processRandomSpawn(15999);
+        sph.processRandomSpawn(15999);
+        
+        assertEquals(3, sph.getNumberOfRocks());        
     }
 }
 

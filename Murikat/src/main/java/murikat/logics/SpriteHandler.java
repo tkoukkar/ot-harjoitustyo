@@ -23,22 +23,24 @@ public class SpriteHandler {
     private int w;
     private int h;
     
-    private Boolean collDetected;
+    private int hitScored;
     
     private Random r;
     
     private Pane pane;
+    private Spaceship ship;
     private Sprite shipSprite;
     private RockRegistry rockReg;
     private HashSet<Sprite> allSprites;
     private HashSet<Sprite> projectiles;
     
-    public SpriteHandler(Pane pane, Sprite playerSprite) {
+    public SpriteHandler(Pane pane, Spaceship plrVessel) {
         this.w = MurikatUi.w;
         this.h = MurikatUi.h;
         
         this.pane = pane;
-        this.shipSprite = playerSprite;
+        this.ship = plrVessel;
+        this.shipSprite = plrVessel.getSprite();
         
         this.r = new Random();
         
@@ -55,7 +57,7 @@ public class SpriteHandler {
     * Luo neljä isoa murikkaa kutsumalla neljä kertaa metodia {@link #spawnRock(int)}.
     */
     public void initRocks() {
-        for(int i = 0; i < 4; i++) { 
+        for (int i = 0; i < 4; i++) {
             spawnRock(i);
         }
     }
@@ -76,6 +78,23 @@ public class SpriteHandler {
         this.allSprites.add(rock);
         this.rockReg.add(rock, 1);
         this.pane.getChildren().add(rock.getForm());
+    }
+    
+    /**
+     * Kutsuu satunnaisesti metodia {@link #spawnRock(int)}; todennäköisyys riippuu pelaajan pisteistä ja pelissä olevian murikoiden määrästä.
+     * 
+     * @param pts pelaajan pisteet
+     */
+    public void processRandomSpawn(int pts) {
+        int p = r.nextInt(16000 - pts);
+
+        while (p < 0) {
+            p += r.nextInt(100);
+        }
+
+        if (p < 20 - (getNumberOfRocks())) {
+            spawnRock(p);
+        }
     }
     
     /**
@@ -117,18 +136,16 @@ public class SpriteHandler {
     }
     
     /**
-     * Kutsuu parametrina annetun avaruusaluksen metodia fire() ja lisää sen tuottaman ammuksen käsiteltävien Sprite-olioiden joukkoon.
-     * 
-     * @param s ampuva avaruusalus
+     * Kutsuu avaruusaluksen metodia fire() ja lisää sen tuottaman ammuksen käsiteltävien Sprite-olioiden joukkoon.
      * 
      * @see murikat.logics.Spaceship#fire()
      */
-    public void processFiring(Spaceship s) {
-        if (this.projectiles.size() >= 3) {
+    public void processFiring() {
+        if (this.projectiles.size() >= ship.getMaxProjectiles()) {
             return;
         }
         
-        Sprite projectile = s.fire();
+        Sprite projectile = this.ship.fire();
         
         this.allSprites.add(projectile);
         this.projectiles.add(projectile);
@@ -168,34 +185,34 @@ public class SpriteHandler {
     /**
      * Tutkii, onko alus tai ammus osunut murikkaan, ja jälkimmäisessä tapauksessa kutsuu murikan halkaisevaa metodia {@link #sunder(murikat.logics.Sprite)}.
      * 
-     * @return true, jos törmäys on tapahtunut, muuten false
      */
-    public Boolean processCollisions() {
-        this.collDetected = false;
-        
+    public void processCollisions() {
+        this.hitScored = 0;
         HashSet<Sprite> allRocks = this.rockReg.getRocks();
         
-        this.allSprites.forEach(sprite -> {
-            if (!this.rockReg.contains(sprite)) {
-                allRocks.forEach(rock -> {
-                    if (rock.getForm().getBoundsInParent().contains(sprite.getPositionX(), sprite.getPositionY())) {
-                        this.collDetected = true;
-                        this.rockReg.setHitRock(rock);
-                        
-                        sprite.setHitPts(sprite.getHitPts() - 1);
-                        rock.setHitPts(rock.getHitPts() - 1);
-                    }
-                });
+        allRocks.forEach(rock -> {
+            if (rock.getForm().getBoundsInParent().contains(this.shipSprite.getPositionX(), this.shipSprite.getPositionY())) {
+                ship.collide();
             }
+            
+            this.projectiles.forEach(projectile -> {
+                if (rock.getForm().getBoundsInParent().contains(projectile.getPositionX(), projectile.getPositionY())) {
+                    this.hitScored = this.rockReg.getGeneration(rock);
+                    this.rockReg.setHitRock(rock);
+                        
+                    projectile.setHitPts(projectile.getHitPts() - 1);
+                    rock.setHitPts(rock.getHitPts() - 1);            
+                    
+                    if (this.rockReg.getGeneration(rock) < 3) {
+                        sunder(rock);
+                    }
+                }
+            });
         });
-        
-        Sprite rock = this.rockReg.getHitRock();
-        
-        if (this.collDetected && this.rockReg.getGeneration(rock) == 1) {
-            sunder(rock);
-        }
-        
-        return this.collDetected;
+    }
+    
+    public int getHitScored() {
+        return this.hitScored;
     }
     
     /**
@@ -204,16 +221,19 @@ public class SpriteHandler {
      * @param rock tuhottava murikka
      */
     public void sunder(Sprite rock) {
-        Polygon p = new Polygon(-15 - r.nextInt(8), -15 - r.nextInt(8), -15 - r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), -15 - r.nextInt(8));
+        int g = rockReg.getGeneration(rock) + 1;
+        
+        Polygon p = new Polygon(-30 / g - r.nextInt(18 / g), -30 / g - r.nextInt(18 / g), -30 / g - r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), -30 / g - r.nextInt(18 / g));
         p.setFill(Color.LIGHTGRAY);
-        Polygon q = new Polygon(-15 - r.nextInt(8), -15 - r.nextInt(8), -15 - r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), 15 + r.nextInt(8), -15 - r.nextInt(8));
+        
+        Polygon q = new Polygon(-30 / g - r.nextInt(18 / g), -30 / g - r.nextInt(18 / g), -30 / g - r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), 30 / g + r.nextInt(18 / g), -30 / g - r.nextInt(18 / g));
         q.setFill(Color.LIGHTGRAY);
 
-        Sprite oneHalf = rock.emitProjectile(p, 15 + r.nextInt(60), 4);
-        Sprite otherHalf = rock.emitProjectile(q, -165  + r.nextInt(60), 4);
+        Sprite oneHalf = rock.emitProjectile(p, 15 + r.nextInt(60), 2 * g);
+        Sprite otherHalf = rock.emitProjectile(q, -165  + r.nextInt(60), 2 * g);
 
-        this.rockReg.add(oneHalf, 2);
-        this.rockReg.add(otherHalf, 2);
+        this.rockReg.add(oneHalf, g);
+        this.rockReg.add(otherHalf, g);
         addSprite(oneHalf);
         addSprite(otherHalf);
 
@@ -236,19 +256,27 @@ public class SpriteHandler {
     }
     
     /**
-     * Poistaa tuhoutuneet Sprite-oliot pelistä.
+     * Poistaa tuhoutuneet Sprite-oliot pelistä ja kertoo, onko pelaajan alus yhä olemassa.
      * 
      * @see murikat.logics.Sprite#destroy()
+     * 
+     * @return false, jos pelaajan alus on tuhoutunut, muuten true
      */
-    public void processDestruction() {
+    public Boolean processDestruction() {
         this.allSprites.forEach(sprite -> {
             if (sprite.getHitPts() < 1) {
                 sprite.destroy();
             }
         });
         
+        if (this.shipSprite.isDestroyed()) {
+            return false;
+        }
+        
         this.allSprites.removeIf(s -> s.isDestroyed());
         this.projectiles.removeIf(s -> s.isDestroyed());
         this.rockReg.remove(this.rockReg.getHitRock());
+        
+        return true;
     }
 }
